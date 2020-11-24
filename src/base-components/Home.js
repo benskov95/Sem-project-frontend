@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { LOCAL_URL, REMOTE_URL } from "../utils/settings";
+import memeFacade from "../facades/memeFacade";
+import React from "react"
 
 export let URL = "";
 
@@ -19,10 +21,16 @@ export default function Home() {
     }
   };
 
+    const [example, setExample] = useState([]);
+    const handleClick = (e) => {
+      e.preventDefault();
+      memeFacade.getMeme().then((data) => setExample(data));
+    };
+
   return (
     <div>
       <h1>Home</h1>
-      <p>This is BornIT's SPA startcode</p>
+      <p>Welcome to BornGag</p>
       <br />
       <p style={{ fontWeight: "bold" }}>
         Select which API to use <br />
@@ -34,20 +42,19 @@ export default function Home() {
         <option value={REMOTE_URL}>Remote API</option>
       </select>
       <br /><br />
-      <h2>Getting started</h2>
+      <img src="https://www.rvcj.com/wp-content/uploads/2015/12/semicolon.jpg" className="img-fluid" alt="logo"/>
+      <br/><br/>
+      <p>Click the button to get five funnys</p>
+      <button onClick={handleClick} className="btn btn-secondary">Click me</button>
       <br />
-      <p>
-        If you have followed the README from the repo for this startcode<br />
-        you should have your URLs set up properly and be ready to go. <br />
-        From here, you should do the following:<br /> <br />
-
-        - Select API to use <br />
-        - Register new user (if first time) <br />
-        - Log in <br />
-        - Check out the provided example <br />
-        - If you have a user with the admin role, check out the admin exclusive section
-
-      </p>
+      {example.map(meme => (
+      <div key={meme.imageUrl}>
+      <p>{meme.title}</p>
+      <img src={meme.imageUrl} className="img-fluid" alt=""></img>
+      </div>
+      ))}
+  
     </div>
   );
 }
+
