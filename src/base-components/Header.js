@@ -68,13 +68,13 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
       </ul>
 
       <Switch>
-      {/* for deployment */}
+        {/* for deployment */}
         <Route path="/ca3-startcode">
           <Redirect to="/" />
         </Route>
         <Route exact path="/">
           <Home />
-          </Route>
+        </Route>
         <PrivateRoute path="/example" isLoggedIn={isLoggedIn} component={Example} />
         <PrivateRoute path="/admin" isLoggedIn={isLoggedIn} component={Admin} />
         <Route path="/login">
@@ -88,7 +88,7 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
           <Register />
         </Route>
         <Route>
-         <NoMatch />
+          <NoMatch />
         </Route>
       </Switch>
     </div>
