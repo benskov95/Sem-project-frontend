@@ -24,7 +24,7 @@ export default function Home() {
     const [example, setExample] = useState([]);
     const handleClick = (e) => {
       e.preventDefault();
-      memeFacade.getfunnyMeme().then((data) => setExample(data));
+      memeFacade.getMeme().then((data) => setExample(data));
     };
 
   return (
