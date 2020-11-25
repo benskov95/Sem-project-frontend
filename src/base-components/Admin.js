@@ -11,8 +11,7 @@ export default function Admin() {
     adminFacade.getUsers().then((users) => setAllUsers([...users]));
   }, [msg]);
 
-
-  allUsers.forEach(user => {
+  allUsers.forEach((user) => {
     if (user.username === localStorage.getItem("user")) {
       let excludedUser = [...allUsers];
       let index = excludedUser.indexOf(user);
@@ -22,14 +21,27 @@ export default function Admin() {
   });
 
   const deleteUser = (e) => {
-    adminFacade.deleteUser(e.target.value).then((res) => setMsg(res.userName));
+    adminFacade
+      .deleteUser(e.target.value)
+      .then((res) => setMsg(res.userName + " has been deleted"));
+  };
+
+  const banUser = (e) => {
+    adminFacade
+      .banUser(e.target.value)
+      .then((res) => setMsg(res.username + " has been banned"));
+  };
+  const unbanUser = (e) => {
+    adminFacade
+      .unbanUser(e.target.value)
+      .then((res) => setMsg(res.username + " has been unbanned"));
   };
 
   return (
     <div>
       <h1>Hello Admin</h1>
       <br />
-      <p>{msg !== "" ? `${msg} has been deleted` : ""} </p>
+      <p>{msg !== "" ? `${msg}` : ""} </p>
       <br />
       <h3>List of registered users</h3>
       <p> (currently logged-in user is excluded)</p>
@@ -50,8 +62,26 @@ export default function Admin() {
                   <td>{user.username}</td>
                   <td>{roles}</td>
                   <td>
-                    <button className="btn btn-secondary" onClick={deleteUser} value={user.username}>
+                    <button
+                      className="btn btn-secondary"
+                      onClick={deleteUser}
+                      value={user.username}
+                    >
                       Delete
+                    </button>
+                    <button
+                      className="btn btn-danger"
+                      onClick={banUser}
+                      value={user.username}
+                    >
+                      Ban
+                    </button>
+                    <button
+                      className="btn btn-secondary"
+                      onClick={unbanUser}
+                      value={user.username}
+                    >
+                      unban
                     </button>
                   </td>
                 </tr>

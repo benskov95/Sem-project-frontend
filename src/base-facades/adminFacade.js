@@ -14,7 +14,22 @@ const adminFacade = () => {
       apiFacade.makeOptions("DELETE", true)
     ).then(handleHttpErrors);
   };
-  return { getUsers, deleteUser };
+
+  const banUser = (userName) => {
+    return fetch(
+      URL + `/api/users/ban/${userName}`,
+      apiFacade.makeOptions("POST", true)
+    ).then(handleHttpErrors);
+  };
+
+  const unbanUser = (userName) => {
+    return fetch(
+      URL + `/api/users/unban/${userName}`,
+      apiFacade.makeOptions("POST", true)
+    ).then(handleHttpErrors);
+  };
+
+  return { getUsers, deleteUser, banUser, unbanUser };
 };
 
 const facade = adminFacade();
