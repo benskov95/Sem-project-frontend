@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { LOCAL_URL, REMOTE_URL } from "../utils/settings";
 import memeFacade from "../facades/memeFacade";
-import React from "react"
+import React from "react";
 import styled from 'styled-components';
 
 const GridWrapper = styled.div`

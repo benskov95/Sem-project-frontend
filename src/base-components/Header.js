@@ -21,7 +21,8 @@ import BornGag from "../images/BornGag.png";
 
 
 const Styles = styled.div`
-  .navbar { background-color: #222; }
+ 
+  .navbar { background-color: #333; }
   a, .navbar-nav, .navbar-light .nav-link {
     color: white;
     &:hover { color: grey; }
@@ -36,6 +37,7 @@ const Styles = styled.div`
     left: 25%;
     right: 25%;
   }
+
 `;
 
 export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {

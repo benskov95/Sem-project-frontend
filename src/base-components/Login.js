@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import apiFacade from "../base-facades/apiFacade";
 import { URL } from "./Home";
 import styled from 'styled-components';
+
 const GridWrapper = styled.div`
   display: grid;
   grid-gap: 10px;
