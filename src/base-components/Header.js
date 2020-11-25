@@ -22,7 +22,14 @@ import BornGag from "../images/BornGag.png";
 
 const Styles = styled.div`
  
-  .navbar { background-color: #333; }
+  .navbar { background-color: #333;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    mim-height: 78px;
+    max-height: 78px;
+   }
   a, .navbar-nav, .navbar-light .nav-link {
     color: white;
     &:hover { color: grey; }
@@ -51,20 +58,15 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
 <Navbar expand="lg">
   <Navbar.Brand as={NavLink} to="/"><img src={BornGag} className="img-fluid" alt="logo" /></Navbar.Brand>
     <Nav className="auto"> 
-      {isLoggedIn && (
-      <React.Fragment>
-      <Nav.Item><Nav.Link as={NavLink} to="/example">Example</Nav.Link></Nav.Item>
-      </React.Fragment>
-    )}
     {roles.includes("admin") && (
       <React.Fragment>
-        <Nav.Item><Nav.Link as={NavLink} to="/admin">Admin</Nav.Link></Nav.Item>
+        <Nav.Item ><Nav.Link as={NavLink} to="/admin">Admin</Nav.Link></Nav.Item>
       </React.Fragment>
     )}
     <Nav.Item><Nav.Link as={NavLink} to="/login">{loginMsg}</Nav.Link></Nav.Item>
     {!isLoggedIn && (
       <React.Fragment>
-        <Nav.Item><Nav.Link as={NavLink} to="/register">Register</Nav.Link></Nav.Item>
+        <Nav.Item ><Nav.Link as={NavLink} to="/register">Register</Nav.Link></Nav.Item>
       </React.Fragment>
     )}
     <Nav.Item style={{ float: "right", color: "white", marginRight: "20px" }}>
