@@ -1,5 +1,3 @@
-import "../styles/App.css";
-import "../styles/Navbar.css";
 import React from "react";
 import 'react-sidebar-ui/dist/index.css';
 import { Nav, Navbar} from 'react-bootstrap';
@@ -47,23 +45,23 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
     <React.Fragment>
 <Styles>
 <Navbar expand="lg">
-  <Navbar.Brand href="/">BornGag Logo</Navbar.Brand>
-    <Nav className="header">
-      <Nav.Item><Nav.Link  to="/">Home</Nav.Link></Nav.Item> 
+  <Navbar.Brand as={NavLink} to="/">BornGag Logo</Navbar.Brand>
+    <Nav className="auto">
+      <Nav.Item><Nav.Link as={NavLink} to="/">Home</Nav.Link></Nav.Item> 
       {isLoggedIn && (
       <React.Fragment>
-      <Nav.Item><Nav.Link  to="/example">Example</Nav.Link></Nav.Item>
+      <Nav.Item><Nav.Link as={NavLink} to="/example">Example</Nav.Link></Nav.Item>
       </React.Fragment>
     )}
     {roles.includes("admin") && (
       <React.Fragment>
-        <Nav.Item><Nav.Link  to="/admin">Admin</Nav.Link></Nav.Item>
+        <Nav.Item><Nav.Link as={NavLink} to="/admin">Admin</Nav.Link></Nav.Item>
       </React.Fragment>
     )}
-    <Nav.Item><Nav.Link  to="/login">{loginMsg}</Nav.Link></Nav.Item>
+    <Nav.Item><Nav.Link as={NavLink} to="/login">{loginMsg}</Nav.Link></Nav.Item>
     {!isLoggedIn && (
       <React.Fragment>
-        <Nav.Item><Nav.Link  to="/register">Register</Nav.Link></Nav.Item>
+        <Nav.Item><Nav.Link as={NavLink} to="/register">Register</Nav.Link></Nav.Item>
       </React.Fragment>
     )}
     <Nav.Item style={{ float: "right", color: "white", marginRight: "20px" }}>
