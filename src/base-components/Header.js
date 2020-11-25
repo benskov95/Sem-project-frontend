@@ -1,12 +1,9 @@
-import React from "react";
 import { Nav, Navbar} from 'react-bootstrap';
 import styled from 'styled-components';
-import {
-  Switch,
-  Route,
-  NavLink,
-  Redirect,
-} from "react-router-dom";
+import "../styles/App.css";
+import "../styles/Navbar.css";
+import React, { useState } from "react";
+import { Switch, Route, NavLink, Redirect } from "react-router-dom";
 import { Login } from "./Login";
 import Home from "./Home";
 import Example from "../components/Example";
@@ -40,12 +37,16 @@ const Styles = styled.div`
 
 `;
 
-export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
 
+
+export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
   let user = isLoggedIn ? `Logged in as: ${localStorage.getItem("user")}` : "";
   let roles = isLoggedIn ? `Roles: ${localStorage.getItem("roles")}` : "";
+  const [show, setShow] = useState(false);
+  const handleShow = () => setShow(!show);
 
   return (
+
     <React.Fragment>
 <Styles>
 <Navbar expand="lg">
@@ -64,7 +65,9 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
     <Nav.Item><Nav.Link as={NavLink} to="/login">{loginMsg}</Nav.Link></Nav.Item>
     {!isLoggedIn && (
       <React.Fragment>
-        <Nav.Item><Nav.Link as={NavLink} to="/register">Register</Nav.Link></Nav.Item>
+        <Nav.Item><Nav.Link as={NavLink} to="/register" onClick={handleShow}>
+             
+                <Register handleShow={handleShow} show={show} />Register</Nav.Link></Nav.Item>
       </React.Fragment>
     )}
     <Nav.Item style={{ float: "right", color: "white", marginRight: "20px" }}>
