@@ -12,9 +12,11 @@ import Home from "./Home";
 import Example from "../components/Example";
 import Admin from "./Admin";
 import Register from "./Register";
-import NoMatch from "./NoMatch"
-import PrivateRoute from "./PrivateRoute"
-import BornGag from "../images/BornGag.png"
+import NoMatch from "./NoMatch";
+import Funny from "../components/Funny";
+import Cat from "../components/Cat";
+import PrivateRoute from "./PrivateRoute";
+import BornGag from "../images/BornGag.png";
 
 
 
@@ -88,6 +90,8 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
       />
     </Route>
     <Route path="/register" component={Register} />
+    <Route path="/funny" component={Funny} />
+    <Route path="/cat" component={Cat} />
     <Route component={NoMatch} />
   </Switch>
   </React.Fragment>

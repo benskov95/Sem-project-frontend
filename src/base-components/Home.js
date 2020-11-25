@@ -37,8 +37,7 @@ export default function Home() {
 
   return (
     <GridWrapper>
-      <h1>Home</h1>
-      <p>Welcome to BornGag</p>
+      <h1>Welcome to BornGag</h1>
       <br />
       <p style={{ fontWeight: "bold" }}>
         Select which API to use <br />
