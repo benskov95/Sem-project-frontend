@@ -1,0 +1,36 @@
+.content {
+    margin-left: auto;
+    margin-right: auto;
+    width: 500px;
+    height: 600px;
+    margin-bottom: 100px;
+}
+
+.meme-img {
+    border: 2px solid rgba(0, 0, 0, 0.103);
+    width: inherit;
+    height: inherit;
+    cursor: pointer;
+}
+
+.meme-title {
+    float: left;
+}
+
+.voteBtn {
+    float: left;
+    margin-top: 8px;
+    margin-right: 12px;
+    cursor: pointer;
+    border: none;
+    background-color: white;
+    outline: none;
+    border: none;
+}
+
+.voteText {
+    float: left;
+    margin-top: 5px;
+    margin-left: 5px;
+    font-size: 20px;
+}

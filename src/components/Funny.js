@@ -5,9 +5,9 @@ const GridWrapper = styled.div`
   margin-top: 80px;
   margin-left: 6em;
   margin-right: 6em;
-`; 
+`;
 
-export default function Cat() {
+export default function Funny() {
     return (
         <GridWrapper>
             <h1>This is Funny</h1>
