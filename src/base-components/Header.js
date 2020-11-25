@@ -15,6 +15,7 @@ import Admin from "./Admin";
 import Register from "./Register";
 import NoMatch from "./NoMatch"
 import PrivateRoute from "./PrivateRoute"
+import BornGag from "../images/BornGag.png"
 
 
 
@@ -45,9 +46,8 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
     <React.Fragment>
 <Styles>
 <Navbar expand="lg">
-  <Navbar.Brand as={NavLink} to="/">BornGag Logo</Navbar.Brand>
-    <Nav className="auto">
-      <Nav.Item><Nav.Link as={NavLink} to="/">Home</Nav.Link></Nav.Item> 
+  <Navbar.Brand as={NavLink} to="/"><img src={BornGag} className="img-fluid" alt="logo" /></Navbar.Brand>
+    <Nav className="auto"> 
       {isLoggedIn && (
       <React.Fragment>
       <Nav.Item><Nav.Link as={NavLink} to="/example">Example</Nav.Link></Nav.Item>
@@ -78,9 +78,7 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
     <Route path="/ca3-startcode">
       <Redirect to="/" />
     </Route>
-    <Route exact path="/" component={Home}>
-      
-      </Route>
+    <Route exact path="/" component={Home} />
     <PrivateRoute path="/example" isLoggedIn={isLoggedIn} component={Example} />
     <PrivateRoute path="/admin" isLoggedIn={isLoggedIn} component={Admin} />
     <Route path="/login">
@@ -90,12 +88,8 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
         loginMsg={loginMsg}
       />
     </Route>
-    <Route path="/register" component={Register}>
-      
-    </Route>
-    <Route>
-     <NoMatch />
-    </Route>
+    <Route path="/register" component={Register} />
+    <Route component={NoMatch} />
   </Switch>
   </React.Fragment>
 </React.Fragment>
