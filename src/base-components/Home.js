@@ -2,6 +2,14 @@ import { useEffect, useState } from "react";
 import { LOCAL_URL, REMOTE_URL } from "../utils/settings";
 import memeFacade from "../facades/memeFacade";
 import React from "react"
+import styled from 'styled-components';
+
+const GridWrapper = styled.div`
+  grid-gap: 10px;
+  margin-top: 1em;
+  margin-left: 6em;
+  margin-right: 6em;
+`; 
 
 export let URL = "";
 
@@ -28,7 +36,7 @@ export default function Home() {
     };
 
   return (
-    <div>
+    <GridWrapper>
       <h1>Home</h1>
       <p>Welcome to BornGag</p>
       <br />
@@ -44,7 +52,7 @@ export default function Home() {
       <br /><br />
       <img src="https://www.rvcj.com/wp-content/uploads/2015/12/semicolon.jpg" className="img-fluid" alt="logo"/>
       <br/><br/>
-      <p>Click the button to get five funnys</p>
+      <p>Click the button to get five funny memes</p>
       <button onClick={handleClick} className="btn btn-secondary">Click me</button>
       <br />
       {example.map(meme => (
@@ -54,7 +62,7 @@ export default function Home() {
       </div>
       ))}
   
-    </div>
+    </GridWrapper>
   );
 }
 

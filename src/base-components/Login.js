@@ -1,6 +1,15 @@
 import React, { useState } from "react";
 import apiFacade from "../base-facades/apiFacade";
 import { URL } from "./Home";
+import styled from 'styled-components';
+const GridWrapper = styled.div`
+  display: grid;
+  grid-gap: 10px;
+  margin-top: 1em;
+  margin-left: 6em;
+  margin-right: 6em;
+  grid-auto-rows: minmax(25px, auto);
+`; 
 
 export const Login = ({ isLoggedIn, loginMsg, setLoginStatus }) => {
   const [user, setUser] = useState({ username: "", password: "" });
@@ -36,7 +45,7 @@ export const Login = ({ isLoggedIn, loginMsg, setLoginStatus }) => {
 
   if (!isLoggedIn) {
     return (
-      <div>
+      <GridWrapper>
         <h2>{loginMsg}</h2>
         <br />
         <form onSubmit={handleSubmit}>
@@ -58,15 +67,15 @@ export const Login = ({ isLoggedIn, loginMsg, setLoginStatus }) => {
           <br />
           <p style={{ color: "red" }}>{error}</p>
         </form>
-      </div>
+      </GridWrapper>
     );
   } else {
     return (
-      <div>
+      <GridWrapper>
         <h2>{loginMsg}</h2>
         <br />
         <button onClick={logout} className="btn btn-secondary">Log out</button>
-      </div>
+      </GridWrapper>
     );
   }
 };;
