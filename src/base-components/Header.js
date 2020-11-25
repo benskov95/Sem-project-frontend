@@ -64,11 +64,7 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
     )}
     <Nav.Item><Nav.Link as={NavLink} to="/login">{loginMsg}</Nav.Link></Nav.Item>
     {!isLoggedIn && (
-      <React.Fragment>
-        <Nav.Item><Nav.Link as={NavLink} to="/register" onClick={handleShow}>
-             
-                <Register handleShow={handleShow} show={show} />Register</Nav.Link></Nav.Item>
-      </React.Fragment>
+        <Nav.Item><Nav.Link as={NavLink} to="/register" onClick={handleShow}>Register</Nav.Link></Nav.Item>
     )}
     <Nav.Item style={{ float: "right", color: "white", marginRight: "20px" }}>
       {user}
@@ -94,7 +90,7 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
         loginMsg={loginMsg}
       />
     </Route>
-    <Route path="/register" component={Register} />
+    <Register handleShow={handleShow} show={show} />
     <Route path="/funny" component={Funny} />
     <Route path="/cat" component={Cat} />
     <Route component={NoMatch} />

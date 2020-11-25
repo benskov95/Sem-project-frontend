@@ -36,7 +36,6 @@ export default function Register({ handleShow, show }) {
   };
 
   return (
-    <>
       <Modal show={show} onHide={handleShow}>
         <Modal.Header closeButton>
           <Modal.Title>Sign Up</Modal.Title>
@@ -73,6 +72,5 @@ export default function Register({ handleShow, show }) {
           </form>
         </Modal.Body>
       </Modal>
-    </>
   );
 }
