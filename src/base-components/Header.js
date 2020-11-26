@@ -15,6 +15,9 @@ import YesOrNo from "../components/YesOrNo"
 import PrivateRoute from "./PrivateRoute";
 import BornGag from "../images/BornGag.png";
 import apiFacade from "../base-facades/apiFacade";
+import { ThemeProvider } from "styled-components";
+import { GlobalStyles } from "../components/globalStyles";
+import { lightTheme, darkTheme } from "../components/Theme"
 
 
 
@@ -54,6 +57,10 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
   const [showRegister, setShowRegister] = useState(false);
   const handleShowLogin = () => setShowLogin(!showLogin);
   const handleShowRegister = () => setShowRegister(!showRegister);
+  const [theme, setTheme] = useState('light');
+  const themeToggler = () => {
+    theme === 'light' ? setTheme('dark') : setTheme('light')
+  }
 
   const logout = () => {
     setLoginStatus(false);
@@ -72,42 +79,44 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
   }, [])
 
   return (
+    <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+        <GlobalStyles />
+        <React.Fragment>
+          <Styles>
+            <Navbar expand="lg">
+              <Navbar.Brand as={NavLink} to="/"><img src={BornGag} className="img-fluid" alt="logo" /></Navbar.Brand>
+              <Nav className="auto">
+                {roles.includes("admin") && (
+                  <React.Fragment>
+                    <Nav.Item ><Nav.Link as={NavLink} to="/admin">Admin</Nav.Link></Nav.Item>
+                  </React.Fragment>
+                )}
+                {!isLoggedIn ? (
+                  <React.Fragment>
+                    <Nav.Item><Button style={{ background: "#333333", border: "none", outline: "none", marginRight: "5px" }} onClick={handleShowLogin}>{loginMsg}</Button>
+                      <Login handleShowLogin={handleShowLogin} showLogin={showLogin} isLoggedIn={isLoggedIn} setLoginStatus={setLoginStatus} /></Nav.Item>
+                    <Nav.Item><Button style={{ background: "#333333", border: "none", outline: "none" }} onClick={handleShowRegister}>Register</Button>
+                      <Register handleShowRegister={handleShowRegister} showRegister={showRegister} /></Nav.Item>
+                  </React.Fragment>
+                ) : <Nav.Item><Button style={{ background: "#333333", border: "none", outline: "none", marginRight: "5px" }} onClick={logout}>{loginMsg}</Button>
+                  </Nav.Item>}
+                <Nav.Item style={{ position: 'absolute', right: 0 }}>
+                  {user}
+                  <br />
+                  {roles}</Nav.Item>
+                <Nav.Item><button onClick={themeToggler}>Switch Theme</button></Nav.Item>
+              </Nav>
+            </Navbar>
+          </Styles>
 
-    <React.Fragment>
-      <Styles>
-        <Navbar expand="lg">
-          <Navbar.Brand as={NavLink} to="/"><img src={BornGag} className="img-fluid" alt="logo" /></Navbar.Brand>
-          <Nav className="auto">
-            {roles.includes("admin") && (
-              <React.Fragment>
-                <Nav.Item ><Nav.Link as={NavLink} to="/admin">Admin</Nav.Link></Nav.Item>
-              </React.Fragment>
-            )}
-            {!isLoggedIn ? (
-              <React.Fragment>
-                <Nav.Item><Button style={{ background: "#333333", border: "none", outline: "none", marginRight: "5px" }} onClick={handleShowLogin}>{loginMsg}</Button>
-                  <Login handleShowLogin={handleShowLogin} showLogin={showLogin} isLoggedIn={isLoggedIn} setLoginStatus={setLoginStatus} /></Nav.Item>
-                <Nav.Item><Button style={{ background: "#333333", border: "none", outline: "none" }} onClick={handleShowRegister}>Register</Button>
-                  <Register handleShowRegister={handleShowRegister} showRegister={showRegister} /></Nav.Item>
-              </React.Fragment>
-            ) : <Nav.Item><Button style={{ background: "#333333", border: "none", outline: "none", marginRight: "5px" }} onClick={logout}>{loginMsg}</Button>
-              </Nav.Item>}
-            <Nav.Item style={{ float: "right", color: "white", marginRight: "20px" }}>
-              {user}
-              <br />
-              {roles}</Nav.Item>
-          </Nav>
-        </Navbar>
-      </Styles>
-
-      <React.Fragment>
-        <Switch>
-          {/* for deployment */}
-          <Route path="/ca3-startcode">
-            <Redirect to="/" />
-          </Route>
-          <PrivateRoute path="/example" isLoggedIn={isLoggedIn} component={Example} />
-          <PrivateRoute path="/admin" isLoggedIn={isLoggedIn} component={Admin} />
+          <React.Fragment>
+            <Switch>
+              {/* for deployment */}
+              <Route path="/ca3-startcode">
+                <Redirect to="/" />
+              </Route>
+              <PrivateRoute path="/example" isLoggedIn={isLoggedIn} component={Example} />
+              <PrivateRoute path="/admin" isLoggedIn={isLoggedIn} component={Admin} />
 
 
           <Route exact path="/" component={Funny}>
@@ -122,7 +131,6 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
         </Switch>
       </React.Fragment>
     </React.Fragment>
-
-
+    </ThemeProvider>
   )
 }
