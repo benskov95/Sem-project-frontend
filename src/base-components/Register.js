@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import apiFacade from "../base-facades/apiFacade";
 import { URL } from "../components/Funny";
 import { Modal } from "react-bootstrap";
+import Confetti from 'react-confetti';
 
 export default function Register({ handleShowRegister, showRegister }) {
   const initialState = { username: "", password: "" };
@@ -37,6 +38,7 @@ export default function Register({ handleShowRegister, showRegister }) {
 
   return (
     <Modal show={showRegister} onHide={handleShowRegister}>
+      <Confetti width={498} height={327} opacity={0.7} numberOfPieces={150} />
       <Modal.Header closeButton>
         <Modal.Title>Sign Up</Modal.Title>
       </Modal.Header>

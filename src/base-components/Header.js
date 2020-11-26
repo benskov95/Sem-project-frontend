@@ -14,6 +14,9 @@ import Cat from "../components/Cat";
 import PrivateRoute from "./PrivateRoute";
 import BornGag from "../images/BornGag.png";
 import apiFacade from "../base-facades/apiFacade";
+import { ThemeProvider } from "styled-components";
+import { GlobalStyles } from "../components/globalStyles";
+import { lightTheme, darkTheme } from "../components/Theme"
 
 
 
@@ -48,11 +51,16 @@ const Styles = styled.div`
 export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
   const [content, setContent] = useState([]);
   let user = isLoggedIn ? localStorage.getItem("user") : "";
-  let roles = isLoggedIn ? `Roles: ${localStorage.getItem("roles")}` : "";
+  let roles = isLoggedIn ? localStorage.getItem("roles") : "";
+  let profilePicture = isLoggedIn ? localStorage.getItem("profilePicture") : "";
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
   const handleShowLogin = () => setShowLogin(!showLogin);
   const handleShowRegister = () => setShowRegister(!showRegister);
+  const [theme, setTheme] = useState('light');
+  const themeToggler = () => {
+    theme === 'light' ? setTheme('dark') : setTheme('light')
+  }
 
   const logout = () => {
     setLoginStatus(false);
@@ -71,52 +79,61 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
   }, [])
 
   return (
-
-    <div>
-      <Styles>
-        <Navbar expand="lg">
-          <Navbar.Brand as={NavLink} to="/"><img src={BornGag} className="img-fluid" alt="logo" /></Navbar.Brand>
-          <Nav className="auto">
-            {roles.includes("admin") && (
-              <React.Fragment>
-                <Nav.Item ><Nav.Link as={NavLink} to="/admin">Admin</Nav.Link></Nav.Item>
-              </React.Fragment>
-            )}
-            {!isLoggedIn ? (
-              <React.Fragment>
-                <Nav.Item>
-                  <Button style={{
-                     background: "#333333", 
-                     border: "none", 
-                     outline: "none", 
-                     marginRight: "5px" }} 
-                     onClick={handleShowLogin}>{loginMsg}</Button>
-                  <Login handleShowLogin={handleShowLogin} showLogin={showLogin} isLoggedIn={isLoggedIn} setLoginStatus={setLoginStatus} /></Nav.Item>
-                <Nav.Item>
-                  <Button style={{ 
-                    background: "#333333", 
-                    border: "none", 
-                    outline: "none" }} 
-                    onClick={handleShowRegister}>Register</Button>
-                  <Register handleShowRegister={handleShowRegister} showRegister={showRegister} /></Nav.Item>
-              </React.Fragment>
-            ) : <Nav.Item>
-              <Button style={{ 
-                background: "#333333", 
-                border: "none", 
-                outline: "none", 
-                marginRight: "5px" }} 
-                onClick={logout}>{loginMsg}</Button>
-              </Nav.Item>}
-          </Nav>
-          <Nav.Item style={{ float: "right", color: "white", marginRight: "20px" }}>
-              {user}
-              <br />
-              {roles}
-            </Nav.Item>
-        </Navbar>
-      </Styles>
-
+    <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+        <GlobalStyles />
+        <React.Fragment>
+          <Styles>
+            <Navbar expand="lg">
+              <Navbar.Brand as={NavLink} to="/"><img src={BornGag} className="img-fluid" alt="logo" /></Navbar.Brand>
+              <Nav.Item><button onClick={themeToggler}>Switch Theme</button></Nav.Item>
+              <Nav className="auto">
+                {roles.includes("admin") && (
+                  <React.Fragment>
+                    <Nav.Item ><Nav.Link as={NavLink} to="/admin">Admin</Nav.Link></Nav.Item>
+                  </React.Fragment>
+                )}
+                {!isLoggedIn ? (
+                  <React.Fragment>
+                    <Nav.Item>
+                      <Button style={{ 
+                        background: "#333333",
+                        border: "none", 
+                        outline: "none", 
+                        marginRight: "5px", 
+                        position: 'absolute', 
+                        right: 0 }} 
+                        onClick={handleShowLogin}>{loginMsg}</Button>
+                      <Login handleShowLogin={handleShowLogin} showLogin={showLogin} isLoggedIn={isLoggedIn} setLoginStatus={setLoginStatus} /></Nav.Item>
+                    <Nav.Item>
+                      <Button style={{ 
+                        background: "#333333",
+                         border: "none", 
+                         outline: "none", 
+                         position: 'absolute', 
+                         right: 75 }} 
+                         onClick={handleShowRegister}>Register</Button>
+                      <Register handleShowRegister={handleShowRegister} showRegister={showRegister} /></Nav.Item>
+                  </React.Fragment>
+                 ) : //<Nav.Item>
+                //   <Button style={{ 
+                //     background: "#333333", 
+                //     border: "none", 
+                //     outline: "none", 
+                //     position: 'absolute', 
+                //     right: 100}} 
+                //     onClick={logout}>{loginMsg}</Button>
+                //   </Nav.Item> 
+                ""
+              }
+                <Nav.Item style={{ position: 'absolute', right: 0, marginRight: "15px" }}>
+                  {isLoggedIn && 
+                  <img src={profilePicture} style={{height: "30px", width: "30px", marginTop: "-35px"}}/>}
+                  <p style={{marginTop: "-15px"}}>{user}</p>
+                  </Nav.Item>
+              </Nav>
+            </Navbar>
+          </Styles>
+          </React.Fragment>
 
         <Switch>
           {/* for deployment */}
@@ -136,6 +153,6 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
           <Route path="/cat" component={Cat} />
           <Route component={NoMatch} />
         </Switch>
-        </div>
+        </ThemeProvider>
   )
 }
