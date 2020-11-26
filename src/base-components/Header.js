@@ -49,10 +49,22 @@ const Styles = styled.div`
 
 
 export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
+  const [content, setContent] = useState([]);
   let user = isLoggedIn ? `Logged in as: ${localStorage.getItem("user")}` : "";
   let roles = isLoggedIn ? `Roles: ${localStorage.getItem("roles")}` : "";
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(!show);
+
+  // useEffect(() => {
+  //   fetch("https://meme-api.herokuapp.com/gimme/2")
+  //   .then(res => res.json())
+  //   .then(data => {
+  //     console.log(data)
+  //     let test = [...data.memes];
+  //     test.forEach(meme => meme.votes = 0);
+  //     setContent([...test])
+  //   })
+  // }, [])
 
   return (
 
@@ -88,6 +100,10 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
             <Redirect to="/" />
           </Route>
           <Route exact path="/" component={Home} />
+          {/* <div><br />
+            <h1>Memes</h1><br />
+            {content.map(meme => <Meme meme={meme}/>)}
+          </div> */}
           <PrivateRoute path="/example" isLoggedIn={isLoggedIn} component={Example} />
           <PrivateRoute path="/admin" isLoggedIn={isLoggedIn} component={Admin} />
           <Route path="/login">
