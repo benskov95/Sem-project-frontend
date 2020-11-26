@@ -14,6 +14,7 @@ import Funny from "../components/Funny";
 import Cat from "../components/Cat";
 import PrivateRoute from "./PrivateRoute";
 import BornGag from "../images/BornGag.png";
+import apiFacade from "../base-facades/apiFacade";
 
 
 
@@ -51,8 +52,16 @@ const Styles = styled.div`
 export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
   let user = isLoggedIn ? `Logged in as: ${localStorage.getItem("user")}` : "";
   let roles = isLoggedIn ? `Roles: ${localStorage.getItem("roles")}` : "";
-  const [show, setShow] = useState(false);
-  const handleShow = () => setShow(!show);
+  const [showLogin, setShowLogin] = useState(false);
+  const [showRegister, setShowRegister] = useState(false);
+  const handleShowLogin = () => setShowLogin(!showLogin);
+  const handleShowRegister = () => setShowRegister(!showRegister);
+
+  const logout = () => {
+    setLoginStatus(false);
+    apiFacade.logout();
+    setShowLogin(false);
+  };
 
   return (
 
@@ -66,13 +75,15 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
                 <Nav.Item ><Nav.Link as={NavLink} to="/admin">Admin</Nav.Link></Nav.Item>
               </React.Fragment>
             )}
-            <Nav.Item><Button style={{background: "#333333",border: "none", outline: "none", marginRight: "5px" }}>{loginMsg}</Button></Nav.Item>
-            {!isLoggedIn && (
-
-              <Nav.Item><Button style={{background: "#333333",border: "none", outline: "none" }} onClick={handleShow}>Register</Button>
-                <Register handleShow={handleShow} show={show} /> </Nav.Item>
-
-            )}
+            {!isLoggedIn ? (
+              <React.Fragment>
+                <Nav.Item><Button style={{ background: "#333333", border: "none", outline: "none", marginRight: "5px" }} onClick={handleShowLogin}>{loginMsg}</Button>
+                  <Login handleShowLogin={handleShowLogin} showLogin={showLogin} isLoggedIn={isLoggedIn} setLoginStatus={setLoginStatus} /></Nav.Item>
+                <Nav.Item><Button style={{ background: "#333333", border: "none", outline: "none" }} onClick={handleShowRegister}>Register</Button>
+                  <Register handleShowRegister={handleShowRegister} showRegister={showRegister} /></Nav.Item>
+              </React.Fragment>
+            ) : <Nav.Item><Button style={{ background: "#333333", border: "none", outline: "none", marginRight: "5px" }} onClick={logout}>{loginMsg}</Button>
+              </Nav.Item>}
             <Nav.Item style={{ float: "right", color: "white", marginRight: "20px" }}>
               {user}
               <br />
@@ -90,19 +101,9 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
           <Route exact path="/" component={Home} />
           <PrivateRoute path="/example" isLoggedIn={isLoggedIn} component={Example} />
           <PrivateRoute path="/admin" isLoggedIn={isLoggedIn} component={Admin} />
-          <Route path="/login">
-            <Login
-              setLoginStatus={setLoginStatus}
-              isLoggedIn={isLoggedIn}
-              loginMsg={loginMsg}
-            />
-          </Route>
-
-
           <Route path="/funny" component={Funny} />
           <Route path="/cat" component={Cat} />
           <Route component={NoMatch} />
-
         </Switch>
       </React.Fragment>
     </React.Fragment>

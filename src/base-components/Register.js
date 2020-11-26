@@ -3,7 +3,7 @@ import apiFacade from "../base-facades/apiFacade";
 import { URL } from "./Home";
 import { Modal } from "react-bootstrap";
 
-export default function Register({ handleShow, show }) {
+export default function Register({ handleShowRegister, showRegister }) {
   const initialState = { username: "", password: "" };
   const [user, setUser] = useState(initialState);
   const [error, setError] = useState("");
@@ -36,41 +36,41 @@ export default function Register({ handleShow, show }) {
   };
 
   return (
-      <Modal show={show} onHide={handleShow}>
-        <Modal.Header closeButton>
-          <Modal.Title>Sign Up</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <form onSubmit={registerUser}>
-            <label>Username</label>
-            <br />
-            <input
-              onChange={handleChange}
-              value={user.username}
-              name="username"
-            ></input>
-            <br />
-            <label>Password</label>
-            <br />
-            <input
-              onChange={handleChange}
-              type="password"
-              value={user.password}
-              name="password"
-            ></input>
-            <br />
-            <br />
-            <input
-              type="submit"
-              value="Register"
-              className="btn btn-secondary"
-            ></input>
-            <br />
-            <br />
-            <p style={{ color: "red" }}>{error}</p>
-            <p style={{ color: "green" }}>{msg}</p>
-          </form>
-        </Modal.Body>
-      </Modal>
+    <Modal show={showRegister} onHide={handleShowRegister}>
+      <Modal.Header closeButton>
+        <Modal.Title>Sign Up</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <form onSubmit={registerUser}>
+          <label>Username</label>
+          <br />
+          <input
+            onChange={handleChange}
+            value={user.username}
+            name="username"
+          ></input>
+          <br />
+          <label>Password</label>
+          <br />
+          <input
+            onChange={handleChange}
+            type="password"
+            value={user.password}
+            name="password"
+          ></input>
+          <br />
+          <br />
+          <input
+            type="submit"
+            value="Register"
+            className="btn btn-secondary"
+          ></input>
+          <br />
+          <br />
+          <p style={{ color: "red" }}>{error}</p>
+          <p style={{ color: "green" }}>{msg}</p>
+        </form>
+      </Modal.Body>
+    </Modal>
   );
 }
