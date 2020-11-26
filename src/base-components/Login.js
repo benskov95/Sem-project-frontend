@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import apiFacade from "../base-facades/apiFacade";
 import { URL } from "../components/Funny";
+import { Modal } from "react-bootstrap";
 import styled from 'styled-components';
 
 const GridWrapper = styled.div`
@@ -10,15 +11,15 @@ const GridWrapper = styled.div`
   margin-left: 6em;
   margin-right: 6em;
   grid-auto-rows: minmax(25px, auto);
-`; 
+`;
 
-export const Login = ({ isLoggedIn, loginMsg, setLoginStatus }) => {
+export const Login = ({ isLoggedIn, setLoginStatus, handleShowLogin, showLogin }) => {
   const [user, setUser] = useState({ username: "", password: "" });
   const [error, setError] = useState("");
 
   const handleChange = (e) => {
+    setUser({ ...user, [e.target.name]: e.target.value });
     setError("");
-    setUser({ ...user, [e.target.id]: e.target.value });
   };
 
   const handleSubmit = (e) => {
@@ -27,59 +28,56 @@ export const Login = ({ isLoggedIn, loginMsg, setLoginStatus }) => {
       setError("Remember to select an API on the Home page.");
     } else {
       apiFacade
-      .login(user)
-      .then((res) => setLoginStatus(!isLoggedIn))
-      .catch((promise) => {
-        if (promise.fullError) {
-          printError(promise, setError);
-        } else {
-          setError("No response from API. Make sure it is running.");
-        }
-      });
+        .login(user)
+        .then((res) => setLoginStatus(!isLoggedIn))
+        .catch((promise) => {
+          if (promise.fullError) {
+            printError(promise, setError);
+          } else {
+            setError("No response from API. Make sure it is running.");
+          }
+        });
     }
   };
 
-  const logout = () => {
-    setLoginStatus(false);
-    apiFacade.logout();
-  };
-
-  if (!isLoggedIn) {
-    return (
-      <GridWrapper>
-        <h2>{loginMsg}</h2>
-        <br />
+  return (
+    <Modal show={showLogin} onHide={handleShowLogin}>
+      <Modal.Header closeButton>
+        <Modal.Title>Login</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
         <form onSubmit={handleSubmit}>
-        <label>Username</label><br />
-          <input
-            id="username"
-            onChange={handleChange}
-          />
+          <label>Username</label>
           <br />
-          <label>Password</label><br />
           <input
-            id="password"
+            onChange={handleChange}
+            value={user.username}
+            name="username"
+          ></input>
+          <br />
+          <label>Password</label>
+          <br />
+          <input
+            onChange={handleChange}
             type="password"
-            onChange={handleChange}
-          />
+            value={user.password}
+            name="password"
+          ></input>
           <br />
           <br />
-          <input type="submit" value="Log in" className="btn btn-secondary"/>
+          <input
+            type="submit"
+            value="Log in"
+            className="btn btn-secondary"
+          ></input>
+          <br />
           <br />
           <p style={{ color: "red" }}>{error}</p>
         </form>
-      </GridWrapper>
-    );
-  } else {
-    return (
-      <GridWrapper>
-        <h2>{loginMsg}</h2>
-        <br />
-        <button onClick={logout} className="btn btn-secondary">Log out</button>
-      </GridWrapper>
-    );
-  }
-};;
+      </Modal.Body>
+    </Modal>
+  );
+};
 
 const printError = (promise, setError) => {
   promise.fullError.then(function (status) {
