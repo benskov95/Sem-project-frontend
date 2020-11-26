@@ -2,16 +2,7 @@ import React, { useState } from "react";
 import apiFacade from "../base-facades/apiFacade";
 import { URL } from "../components/Funny";
 import { Modal } from "react-bootstrap";
-import styled from 'styled-components';
 
-const GridWrapper = styled.div`
-  display: grid;
-  grid-gap: 80px;
-  margin-top: 1em;
-  margin-left: 6em;
-  margin-right: 6em;
-  grid-auto-rows: minmax(25px, auto);
-`;
 
 export const Login = ({ isLoggedIn, setLoginStatus, handleShowLogin, showLogin }) => {
   const [user, setUser] = useState({ username: "", password: "" });

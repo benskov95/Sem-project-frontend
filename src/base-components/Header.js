@@ -47,7 +47,7 @@ const Styles = styled.div`
 
 export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
   const [content, setContent] = useState([]);
-  let user = isLoggedIn ? `Logged in as: ${localStorage.getItem("user")}` : "";
+  let user = isLoggedIn ? localStorage.getItem("user") : "";
   let roles = isLoggedIn ? `Roles: ${localStorage.getItem("roles")}` : "";
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
@@ -72,7 +72,7 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
 
   return (
 
-    <React.Fragment>
+    <div>
       <Styles>
         <Navbar expand="lg">
           <Navbar.Brand as={NavLink} to="/"><img src={BornGag} className="img-fluid" alt="logo" /></Navbar.Brand>
@@ -84,22 +84,40 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
             )}
             {!isLoggedIn ? (
               <React.Fragment>
-                <Nav.Item><Button style={{ background: "#333333", border: "none", outline: "none", marginRight: "5px" }} onClick={handleShowLogin}>{loginMsg}</Button>
+                <Nav.Item>
+                  <Button style={{
+                     background: "#333333", 
+                     border: "none", 
+                     outline: "none", 
+                     marginRight: "5px" }} 
+                     onClick={handleShowLogin}>{loginMsg}</Button>
                   <Login handleShowLogin={handleShowLogin} showLogin={showLogin} isLoggedIn={isLoggedIn} setLoginStatus={setLoginStatus} /></Nav.Item>
-                <Nav.Item><Button style={{ background: "#333333", border: "none", outline: "none" }} onClick={handleShowRegister}>Register</Button>
+                <Nav.Item>
+                  <Button style={{ 
+                    background: "#333333", 
+                    border: "none", 
+                    outline: "none" }} 
+                    onClick={handleShowRegister}>Register</Button>
                   <Register handleShowRegister={handleShowRegister} showRegister={showRegister} /></Nav.Item>
               </React.Fragment>
-            ) : <Nav.Item><Button style={{ background: "#333333", border: "none", outline: "none", marginRight: "5px" }} onClick={logout}>{loginMsg}</Button>
+            ) : <Nav.Item>
+              <Button style={{ 
+                background: "#333333", 
+                border: "none", 
+                outline: "none", 
+                marginRight: "5px" }} 
+                onClick={logout}>{loginMsg}</Button>
               </Nav.Item>}
-            <Nav.Item style={{ float: "right", color: "white", marginRight: "20px" }}>
+          </Nav>
+          <Nav.Item style={{ float: "right", color: "white", marginRight: "20px" }}>
               {user}
               <br />
-              {roles}</Nav.Item>
-          </Nav>
+              {roles}
+            </Nav.Item>
         </Navbar>
       </Styles>
 
-      <React.Fragment>
+
         <Switch>
           {/* for deployment */}
           <Route path="/ca3-startcode">
@@ -118,9 +136,6 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
           <Route path="/cat" component={Cat} />
           <Route component={NoMatch} />
         </Switch>
-      </React.Fragment>
-    </React.Fragment>
-
-
+        </div>
   )
 }
