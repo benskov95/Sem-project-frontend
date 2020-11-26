@@ -12,6 +12,7 @@ import Register from "./Register";
 import { Modal } from "react-bootstrap";
 import NoMatch from "./NoMatch";
 import Cat from "../components/Cat";
+import YesOrNo from "../components/YesOrNo"
 import PrivateRoute from "./PrivateRoute";
 import BornGag from "../images/BornGag.png";
 import apiFacade from "../base-facades/apiFacade";
@@ -159,7 +160,6 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
           <PrivateRoute path="/example" isLoggedIn={isLoggedIn} component={Example} />
           <PrivateRoute path="/admin" isLoggedIn={isLoggedIn} component={Admin} />
 
-
           <Route exact path="/" component={Funny}>
             <div><br />
               <h1>Memes</h1><br />
@@ -167,6 +167,7 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
             </div>
           </Route>
           <Route path="/cat" component={Cat} />
+          <Route path="/yesorno" component={YesOrNo} />
           <Route component={NoMatch} />
         </Switch>
 
@@ -178,7 +179,7 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
             <p>Weed</p>
         </Modal.Body>
         </Modal>
-
-        </ThemeProvider>
+        
+    </ThemeProvider>
   )
 }
