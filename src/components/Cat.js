@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import memeFacade from "../facades/memeFacade"
 import {Button} from "react-bootstrap"
+import Content from "./Content"
 
 const GridWrapper = styled.div`
   grid-gap: 10px;
@@ -29,8 +30,7 @@ export default function Cat() {
 
     return (
         <GridWrapper>
-            
-           {cats.map(cat =>  <div><img className="meme-img" src={cat.imageUrl} alt=""/></div>)}
+          <Content memes={cats}/>
            <Button onClick={loadMore} className="btn btn-secondary">Load more</Button>
         </GridWrapper>
     );

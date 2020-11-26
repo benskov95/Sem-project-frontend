@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import memeFacade from "../facades/memeFacade"
 import {Button} from "react-bootstrap"
-
+import Content from "./Content"
 const GridWrapper = styled.div`
   grid-gap: 10px;
   margin-top: 80px;
@@ -29,8 +29,7 @@ export default function YesOrNo() {
 
     return (
         <GridWrapper>
-            
-           {yons.map(yon =>  <div><img className="meme-img" src={yon.imageUrl} alt=""/></div>)}
+            <Content memes={yons}/>
            <Button onClick={loadMore} className="btn btn-outline-info">Load more</Button>
         </GridWrapper>
     );
