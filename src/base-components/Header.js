@@ -1,4 +1,4 @@
-import { Nav, Navbar} from 'react-bootstrap';
+import { Nav, Navbar } from 'react-bootstrap';
 import styled from 'styled-components';
 import "../styles/App.css";
 import "../styles/Navbar.css";
@@ -55,53 +55,53 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
   return (
 
     <React.Fragment>
-<Styles>
-<Navbar expand="lg">
-  <Navbar.Brand as={NavLink} to="/"><img src={BornGag} className="img-fluid" alt="logo" /></Navbar.Brand>
-    <Nav className="auto"> 
-    {roles.includes("admin") && (
+      <Styles>
+        <Navbar expand="lg">
+          <Navbar.Brand as={NavLink} to="/"><img src={BornGag} className="img-fluid" alt="logo" /></Navbar.Brand>
+          <Nav className="auto">
+            {roles.includes("admin") && (
+              <React.Fragment>
+                <Nav.Item ><Nav.Link as={NavLink} to="/admin">Admin</Nav.Link></Nav.Item>
+              </React.Fragment>
+            )}
+            <Nav.Item><Nav.Link as={NavLink} to="/login">{loginMsg}</Nav.Link></Nav.Item>
+            {!isLoggedIn && (
+
+              <Nav.Item><Nav.Link as={NavLink} to="/register" onClick={handleShow}>Register</Nav.Link></Nav.Item>
+
+            )}
+            <Nav.Item style={{ float: "right", color: "white", marginRight: "20px" }}>
+              {user}
+              <br />
+              {roles}</Nav.Item>
+          </Nav>
+        </Navbar>
+      </Styles>
+
       <React.Fragment>
-        <Nav.Item ><Nav.Link as={NavLink} to="/admin">Admin</Nav.Link></Nav.Item>
+        <Switch>
+          {/* for deployment */}
+          <Route path="/ca3-startcode">
+            <Redirect to="/" />
+          </Route>
+          <Route exact path="/" component={Home} />
+          <PrivateRoute path="/example" isLoggedIn={isLoggedIn} component={Example} />
+          <PrivateRoute path="/admin" isLoggedIn={isLoggedIn} component={Admin} />
+          <Route path="/login">
+            <Login
+              setLoginStatus={setLoginStatus}
+              isLoggedIn={isLoggedIn}
+              loginMsg={loginMsg}
+            />
+          </Route>
+          <Route path="/funny" component={Funny} />
+          <Route path="/cat" component={Cat} />
+          <Route component={NoMatch} />
+          <Register handleShow={handleShow} show={show} />
+        </Switch>
       </React.Fragment>
-    )}
-    <Nav.Item><Nav.Link as={NavLink} to="/login">{loginMsg}</Nav.Link></Nav.Item>
-    {!isLoggedIn && (
-
-        <Nav.Item><Nav.Link as={NavLink} to="/register" onClick={handleShow}>Register</Nav.Link></Nav.Item>
-        
-    )}
-    <Nav.Item style={{ float: "right", color: "white", marginRight: "20px" }}>
-      {user}
-      <br />
-      {roles}</Nav.Item>
-    </Nav>
-</Navbar>
-</Styles>
-
-<React.Fragment>
-  <Switch>
-  {/* for deployment */}
-    <Route path="/ca3-startcode">
-      <Redirect to="/" />
-    </Route>
-    <Route exact path="/" component={Home} />
-    <PrivateRoute path="/example" isLoggedIn={isLoggedIn} component={Example} />
-    <PrivateRoute path="/admin" isLoggedIn={isLoggedIn} component={Admin} />
-    <Route path="/login">
-      <Login
-        setLoginStatus={setLoginStatus}
-        isLoggedIn={isLoggedIn}
-        loginMsg={loginMsg}
-      />
-    </Route>
-    <Register handleShow={handleShow} show={show} />
-    <Route path="/funny" component={Funny} />
-    <Route path="/cat" component={Cat} />
-    <Route component={NoMatch} />
-  </Switch>
-  </React.Fragment>
-</React.Fragment>
+    </React.Fragment>
 
 
-)
+  )
 }
