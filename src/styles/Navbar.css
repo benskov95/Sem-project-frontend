@@ -10,6 +10,10 @@ ul.header li {
   float: left;
 }
 
+.register {
+  color: #555555
+}
+
 ul.header li a {
   display: block;
   color: white;

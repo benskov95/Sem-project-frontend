@@ -1,4 +1,4 @@
-import { Nav, Navbar } from 'react-bootstrap';
+import { Nav, Navbar, Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import "../styles/App.css";
 import "../styles/Navbar.css";
@@ -46,6 +46,8 @@ const Styles = styled.div`
 
 
 
+
+
 export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
   let user = isLoggedIn ? `Logged in as: ${localStorage.getItem("user")}` : "";
   let roles = isLoggedIn ? `Roles: ${localStorage.getItem("roles")}` : "";
@@ -64,10 +66,11 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
                 <Nav.Item ><Nav.Link as={NavLink} to="/admin">Admin</Nav.Link></Nav.Item>
               </React.Fragment>
             )}
-            <Nav.Item><Nav.Link as={NavLink} to="/login">{loginMsg}</Nav.Link></Nav.Item>
+            <Nav.Item><Button style={{background: "#333333",border: "none", outline: "none", marginRight: "5px" }}>{loginMsg}</Button></Nav.Item>
             {!isLoggedIn && (
 
-              <Nav.Item><Nav.Link as={NavLink} to="/register" onClick={handleShow}>Register</Nav.Link></Nav.Item>
+              <Nav.Item><Button style={{background: "#333333",border: "none", outline: "none" }} onClick={handleShow}>Register</Button>
+                <Register handleShow={handleShow} show={show} /> </Nav.Item>
 
             )}
             <Nav.Item style={{ float: "right", color: "white", marginRight: "20px" }}>
@@ -98,9 +101,6 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
 
           <Route path="/funny" component={Funny} />
           <Route path="/cat" component={Cat} />
-          <Route path="/register">
-            <Register handleShow={handleShow} show={show} />
-          </Route>
           <Route component={NoMatch} />
 
         </Switch>
