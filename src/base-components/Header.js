@@ -109,7 +109,7 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
           <PrivateRoute path="/admin" isLoggedIn={isLoggedIn} component={Admin} />
 
 
-          <Route path="/" component={Funny}>
+          <Route exact path="/" component={Funny}>
             <div><br />
               <h1>Memes</h1><br />
               {content.map(meme => <Funny meme={meme} key={meme.url} />)}
