@@ -9,6 +9,7 @@ import Funny from "../components/Funny";
 import Example from "../components/Example";
 import Admin from "./Admin";
 import Register from "./Register";
+import { Modal } from "react-bootstrap";
 import NoMatch from "./NoMatch";
 import Cat from "../components/Cat";
 import PrivateRoute from "./PrivateRoute";
@@ -55,8 +56,10 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
   let profilePicture = isLoggedIn ? localStorage.getItem("profilePicture") : "";
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
+  const [showEdit, setShowEdit] = useState(false);
   const handleShowLogin = () => setShowLogin(!showLogin);
   const handleShowRegister = () => setShowRegister(!showRegister);
+  const handleShowEdit = () => setShowEdit(!showEdit);
   const [theme, setTheme] = useState('light');
   const themeToggler = () => {
     theme === 'light' ? setTheme('dark') : setTheme('light')
@@ -67,6 +70,10 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
     apiFacade.logout();
     setShowLogin(false);
   };
+
+  const test = () => {
+    handleShowEdit();
+  }
 
   useEffect(() => {
     fetch("https://meme-api.herokuapp.com/gimme/1")
@@ -127,7 +134,16 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
               }
                 <Nav.Item style={{ position: 'absolute', right: 0, marginRight: "15px" }}>
                   {isLoggedIn && 
-                  <img src={profilePicture} style={{height: "30px", width: "30px", marginTop: "-35px"}}/>}
+                  <img src={profilePicture}
+                    onClick={test}
+                    style={{
+                    height: "30px", 
+                    width: "30px", 
+                    marginTop: "-35px", 
+                    cursor: "pointer"
+                    }}>
+                    </img>
+                  }
                   <p style={{marginTop: "-15px"}}>{user}</p>
                   </Nav.Item>
               </Nav>
@@ -153,6 +169,16 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
           <Route path="/cat" component={Cat} />
           <Route component={NoMatch} />
         </Switch>
+
+        <Modal show={showEdit} onHide={handleShowEdit}>
+        <Modal.Header closeButton>
+          <Modal.Title>My account</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+            <p>Weed</p>
+        </Modal.Body>
+        </Modal>
+
         </ThemeProvider>
   )
 }

@@ -18,7 +18,6 @@ function apiFacade() {
 
   const setUserAndRoles = (token, profilePicture) => {
     let userFromToken = JSON.parse(atob(token.split(".")[1]));
-    console.log(userFromToken)
     localStorage.setItem("user", userFromToken.sub);
     localStorage.setItem("roles", userFromToken.roles);
     localStorage.setItem("profilePicture", profilePicture);
