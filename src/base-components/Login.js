@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import apiFacade from "../base-facades/apiFacade";
-import { URL } from "./Home";
+import { URL } from "../components/Funny";
 import styled from 'styled-components';
 
 const GridWrapper = styled.div`

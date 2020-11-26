@@ -2,15 +2,14 @@ import { Nav, Navbar, Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import "../styles/App.css";
 import "../styles/Navbar.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Switch, Route, NavLink, Redirect } from "react-router-dom";
 import { Login } from "./Login";
-import Home from "./Home";
+import Funny from "../components/Funny";
 import Example from "../components/Example";
 import Admin from "./Admin";
 import Register from "./Register";
 import NoMatch from "./NoMatch";
-import Funny from "../components/Funny";
 import Cat from "../components/Cat";
 import PrivateRoute from "./PrivateRoute";
 import BornGag from "../images/BornGag.png";
@@ -45,9 +44,6 @@ const Styles = styled.div`
 `;
 
 
-
-
-
 export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
   const [content, setContent] = useState([]);
   let user = isLoggedIn ? `Logged in as: ${localStorage.getItem("user")}` : "";
@@ -55,16 +51,15 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(!show);
 
-  // useEffect(() => {
-  //   fetch("https://meme-api.herokuapp.com/gimme/2")
-  //   .then(res => res.json())
-  //   .then(data => {
-  //     console.log(data)
-  //     let test = [...data.memes];
-  //     test.forEach(meme => meme.votes = 0);
-  //     setContent([...test])
-  //   })
-  // }, [])
+  useEffect(() => {
+    fetch("https://meme-api.herokuapp.com/gimme/1")
+    .then(res => res.json())
+    .then(data => {
+      let test = [...data.memes];
+      test.forEach(meme => meme.votes = 0);
+      setContent([...test])
+    })
+  }, [])
 
   return (
 
@@ -99,11 +94,6 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
           <Route path="/ca3-startcode">
             <Redirect to="/" />
           </Route>
-          <Route exact path="/" component={Home} />
-          {/* <div><br />
-            <h1>Memes</h1><br />
-            {content.map(meme => <Meme meme={meme}/>)}
-          </div> */}
           <PrivateRoute path="/example" isLoggedIn={isLoggedIn} component={Example} />
           <PrivateRoute path="/admin" isLoggedIn={isLoggedIn} component={Admin} />
           <Route path="/login">
@@ -115,7 +105,12 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
           </Route>
 
 
-          <Route path="/funny" component={Funny} />
+          <Route path="/" component={Funny}>
+            <div><br />
+              <h1>Memes</h1><br />
+              {content.map(meme => <Funny meme={meme} key={meme.url}/>)}
+            </div>
+          </Route>
           <Route path="/cat" component={Cat} />
           <Route component={NoMatch} />
 
