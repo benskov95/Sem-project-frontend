@@ -1,4 +1,4 @@
-import { URL } from "../base-components/Home";
+import { URL } from "../components/Funny";
 import apiFacade, { handleHttpErrors } from "../base-facades/apiFacade";
 
 const memeFacade = () => {
@@ -8,7 +8,17 @@ const memeFacade = () => {
     .then(handleHttpErrors);
   };
 
-  return { getMeme };
+  const getCat = () => {
+    return fetch(URL + "/api/memes/cat", apiFacade.makeOptions("GET", true))
+    .then(handleHttpErrors);
+  }
+
+  const getYon = () => {
+    return fetch(URL + "/api/memes/yesorno", apiFacade.makeOptions("GET", true))
+    .then(handleHttpErrors)
+  }
+
+  return { getMeme, getCat, getYon };
 };
 
 const facade = memeFacade();

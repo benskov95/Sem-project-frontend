@@ -11,6 +11,8 @@
     width: inherit;
     height: inherit;
     cursor: pointer;
+    width: 300px;
+    
 }
 
 .meme-title {

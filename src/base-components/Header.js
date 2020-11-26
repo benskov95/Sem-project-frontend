@@ -11,6 +11,7 @@ import Admin from "./Admin";
 import Register from "./Register";
 import NoMatch from "./NoMatch";
 import Cat from "../components/Cat";
+import YesOrNo from "../components/YesOrNo"
 import PrivateRoute from "./PrivateRoute";
 import BornGag from "../images/BornGag.png";
 import apiFacade from "../base-facades/apiFacade";
@@ -116,6 +117,7 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
             </div>
           </Route>
           <Route path="/cat" component={Cat} />
+          <Route path="/yesorno" component={YesOrNo} />
           <Route component={NoMatch} />
         </Switch>
       </React.Fragment>

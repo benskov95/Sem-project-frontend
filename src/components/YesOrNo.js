@@ -12,26 +12,26 @@ const GridWrapper = styled.div`
 
 
 
-export default function Cat() {
+export default function YesOrNo() {
 
-    const [cats, setCats] = useState([])
+    const [yons, setYons] = useState([])
 
     useEffect (() => {
-        memeFacade.getCat().then(res => setCats(res))
+        memeFacade.getYon().then(res => setYons(res))
 
     },[])
 
     const loadMore = (e) =>{
         e.preventDefault()
-        memeFacade.getCat().then(res => setCats([...cats, ...res]))
+        memeFacade.getYon().then(res => setYons([...yons, ...res]))
     }
 
 
     return (
         <GridWrapper>
             
-           {cats.map(cat =>  <div><img className="meme-img" src={cat.imageUrl} alt=""/></div>)}
-           <Button onClick={loadMore} className="btn btn-secondary">Load more</Button>
+           {yons.map(yon =>  <div><img className="meme-img" src={yon.imageUrl} alt=""/></div>)}
+           <Button onClick={loadMore} className="btn btn-outline-info">Load more</Button>
         </GridWrapper>
     );
 }
