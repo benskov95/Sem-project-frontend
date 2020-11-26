@@ -94,10 +94,15 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
               loginMsg={loginMsg}
             />
           </Route>
+
+
           <Route path="/funny" component={Funny} />
           <Route path="/cat" component={Cat} />
+          <Route path="/register">
+            <Register handleShow={handleShow} show={show} />
+          </Route>
           <Route component={NoMatch} />
-          <Register handleShow={handleShow} show={show} />
+
         </Switch>
       </React.Fragment>
     </React.Fragment>
