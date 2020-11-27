@@ -20,24 +20,31 @@ class SideNav extends React.Component {
             activePath: props.location.pathname,
             items: [
                 {
-                  path: '/', 
-                  name: 'Funny',
-                  css: 'fas fa-laugh-squint',
-                  key: 1 
+                    path: '/',
+                    name: 'Funny',
+                    css: 'fas fa-laugh-squint',
+                    key: 1
                 },
                 {
-                  path: '/cat',
-                  name: 'Cat',
-                  css: 'fas fa-cat',
-                  key: 2
+                    path: '/cat',
+                    name: 'Cat',
+                    css: 'fas fa-cat',
+                    key: 2
                 },
                 {
-                  path: '/yesorno',
-                  name: 'YesOrNo',
-                  css: 'fas fa-balance-scale',
-                  key: 3
+                    path: '/dog',
+                    name: 'Dog',
+                    css: 'fas fa-dog',
+                    key: 3
                 },
-              ]
+                {
+                    path: '/yesorno',
+                    name: 'YesOrNo',
+                    css: 'fas fa-balance-scale',
+                    key: 4
+                },
+
+            ]
         }
     }
 
@@ -47,12 +54,12 @@ class SideNav extends React.Component {
 
     render() {
         const { items, activePath } = this.state;
-        return(
+        return (
             <StyledSideNav>
                 {
                     items.map((item) => {
                         return (
-                            <NavItem 
+                            <NavItem
                                 path={item.path}
                                 name={item.name}
                                 css={item.css}
@@ -93,7 +100,7 @@ class NavItem extends React.Component {
 
     render() {
         const { active } = this.props;
-        return(
+        return (
             <StyledNavItem active={active}>
                 <Link to={this.props.path} className={this.props.css} onClick={this.handleClick}>
                     <NavIcon></NavIcon>
