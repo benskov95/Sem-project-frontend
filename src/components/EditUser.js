@@ -10,6 +10,7 @@ export default function EditUser({username, profilePicture}) {
     const [newProfilePic, setNewProfilePic] = useState({profilePic: profilePicture})
     const [checkPw, setCheckPw] = useState("");
     const [msg, setMsg] = useState("");
+    const [error, setError] = useState("");
     let user = {username: username, profilePicture: newProfilePic.profilePic};
 
     const openProfilePic = () => {
@@ -46,13 +47,21 @@ export default function EditUser({username, profilePicture}) {
 
     const handlePwSubmit = (e) => {
         e.preventDefault();
+        setMsg("");
+        setError("");
+        if (passwords.newPw !== checkPw) {
+            setError("New password doesn't match confirmed password. Try again.")
+        } else {
         userFacade.changePassword(passwords, user)
         .then(res => setMsg(res.message))
+        .catch(err => printError(err, setError))
+        }
     }
 
     const goBack = () => {
         setDoReturn(false);
         setChangePic(false);
+        setChangePw(false);
     }
 
     return (
@@ -88,18 +97,21 @@ export default function EditUser({username, profilePicture}) {
                     <h2>Change password</h2>
                     <form onSubmit={handlePwSubmit}>
                     <input
+                    type="password"
                     onChange={handlePwChange}
                     value={passwords.oldPw}
                     name="oldPw"
                     placeholder="Current password"
                     /><br />
                     <input
+                    type="password"
                     onChange={handlePwChange}
                     value={passwords.newPw}
                     name="newPw"
                     placeholder="New password"
                     /><br />
                     <input
+                    type="password"
                     onChange={handlePwChange}
                     value={checkPw}
                     name="checkPw"
@@ -107,6 +119,7 @@ export default function EditUser({username, profilePicture}) {
                     /><br />
                     <input type="submit" value="Change password" />
                     <p style={{color: "green"}}>{msg}</p>
+                    <p style={{color: "red"}}>{error}</p>
                     </form>
                     <button onClick={goBack}>Back</button>
                 </div>
@@ -114,3 +127,9 @@ export default function EditUser({username, profilePicture}) {
         </div>
     )
 }
+
+const printError = (promise, setError) => {
+    promise.fullError.then(function (status) {
+      setError(`${status.message}`);
+    });
+  };
