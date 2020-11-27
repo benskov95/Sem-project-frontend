@@ -94,7 +94,6 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
         <Styles>
           <Navbar expand="lg">
             <Navbar.Brand as={NavLink} to="/"><img src={BornGag} className="img-fluid" alt="logo" /></Navbar.Brand>
-            <Nav.Item><button onClick={themeToggler}>Switch Theme</button></Nav.Item>
             <Nav className="auto">
               {roles.includes("admin") && (
                 <React.Fragment>
@@ -108,8 +107,7 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
                       background: "#333333",
                       border: "none",
                       outline: "none",
-                      marginRight: "5px",
-                      position: 'absolute',
+                      position: 'fixed',
                       right: 0
                     }}
                       onClick={handleShowLogin}>{loginMsg}</Button>
@@ -119,7 +117,7 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
                       background: "#333333",
                       border: "none",
                       outline: "none",
-                      position: 'absolute',
+                      position: 'fixed',
                       right: 75
                     }}
                       onClick={handleShowRegister}>Register</Button>
@@ -136,14 +134,14 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
                 //   </Nav.Item> 
                 ""
               }
-              <Nav.Item style={{ position: 'absolute', right: 0, marginRight: "15px" }}>
+              <Nav.Item style={{ position: 'fixed', right: 0, marginRight: "15px" }}>
                 {isLoggedIn &&
                   <img src={profilePicture}
                     onClick={test}
                     style={{
                       height: "30px",
                       width: "30px",
-                      marginTop: "-35px",
+                      marginTop: "-40px",
                       cursor: "pointer"
                     }}>
                   </img>
@@ -152,6 +150,7 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
               </Nav.Item>
             </Nav>
           </Navbar>
+          <Button style={{ position: 'fixed', right: 10, bottom: 10, background: "#333333", border: "none" }} onClick={themeToggler}>Switch Theme</Button>
         </Styles>
       </React.Fragment>
 
