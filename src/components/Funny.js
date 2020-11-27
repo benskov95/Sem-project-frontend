@@ -34,7 +34,7 @@ export default function Funny() {
 
   return (
     <GridWrapper>
-    {funnys.map(funny => <Content meme={funny} key={funny.imageUrl} loadMore={loadMore} />)}
+    {funnys.map(funny => <Content meme={funny} key={funnys.indexOf(funny)} loadMore={loadMore} />)}
           <Button onClick={loadMore} className="btn btn-secondary">Load more</Button>
   </GridWrapper>
   )

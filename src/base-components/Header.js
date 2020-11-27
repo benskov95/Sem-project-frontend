@@ -20,6 +20,7 @@ import { ThemeProvider } from "styled-components";
 import { GlobalStyles } from "../components/globalStyles";
 import { lightTheme, darkTheme } from "../components/Theme"
 import Dog from '../components/Dog';
+import EditUser from "../components/EditUser"
 
 
 
@@ -68,12 +69,13 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
   }
 
   const logout = () => {
-    setLoginStatus(false);
     apiFacade.logout();
+    setLoginStatus(false);
     setShowLogin(false);
-  };
+    setShowEdit(false);
+  }
 
-  const test = () => {
+  const toggleUserOptions = () => {
     handleShowEdit();
   }
 
@@ -137,7 +139,7 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
               <Nav.Item style={{ position: 'fixed', right: 0, marginRight: "15px" }}>
                 {isLoggedIn &&
                   <img src={profilePicture}
-                    onClick={test}
+                    onClick={toggleUserOptions}
                     style={{
                       height: "30px",
                       width: "30px",
@@ -179,8 +181,9 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
           <Modal.Title>My account</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>Weed</p>
+          <EditUser username={user} profilePicture={profilePicture} />
         </Modal.Body>
+        <Modal.Footer><button onClick={logout}>Log out</button></Modal.Footer>
       </Modal>
 
     </ThemeProvider>
