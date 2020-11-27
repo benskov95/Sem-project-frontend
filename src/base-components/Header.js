@@ -166,7 +166,7 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
         <Route exact path="/" component={Funny}>
           <div><br />
             <h1>Memes</h1><br />
-            {content.map(meme => <Funny meme={meme} key={meme.url} />)}
+            <Funny />
           </div>
         </Route>
         <Route path="/cat" component={Cat} />

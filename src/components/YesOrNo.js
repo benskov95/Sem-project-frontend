@@ -29,8 +29,8 @@ export default function YesOrNo() {
 
     return (
         <GridWrapper>
-            <Content memes={yons} />
-            <Button onClick={loadMore} className="btn btn-secondary">Load more</Button>
+           {yons.map(yon => <Content meme={yon} key={yon.imageUrl} loadMore={loadMore} />)}
+          <Button onClick={loadMore} className="btn btn-secondary">Load more</Button>
         </GridWrapper>
     );
 }

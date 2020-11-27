@@ -30,8 +30,8 @@ export default function Cat() {
 
     return (
         <GridWrapper>
-          <Content memes={cats}/>
-           <Button onClick={loadMore} className="btn btn-secondary">Load more</Button>
+          {cats.map(cat => <Content meme={cat} key={cat.imageUrl} loadMore={loadMore} />)}
+          <Button onClick={loadMore} className="btn btn-secondary">Load more</Button>
         </GridWrapper>
     );
 }

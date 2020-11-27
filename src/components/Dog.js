@@ -28,8 +28,8 @@ export default function Dog() {
 
     return (
         <GridWrapper>
-            <Content memes={dogs} />
-            <Button onClick={loadMore} className="btn btn-secondary">Load more</Button>
+           {dogs.map(dog => <Content meme={dog} key={dog.imageUrl} loadMore={loadMore} />)}
+          <Button onClick={loadMore} className="btn btn-secondary">Load more</Button>
         </GridWrapper>
 
     )
