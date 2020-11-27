@@ -28,7 +28,7 @@ export default function Funny() {
 
   const loadMore = (e) => {
       e.preventDefault()
-      memeFacade.getMeme().then(res => setFunnys([...setFunnys, ...res]))
+      memeFacade.getMeme().then(res => setFunnys([...funnys, ...res]))
   }
 
 
