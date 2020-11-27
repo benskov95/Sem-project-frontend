@@ -40,7 +40,7 @@ export default function Register({ handleShowRegister, showRegister }) {
   return (
     <Modal show={showRegister} onHide={handleShowRegister}>
       {success && (
-        <Confetti width={498} height={327} opacity={0.7} numberOfPieces={150} />)}
+        <Confetti width={498} height={367} opacity={0.7} numberOfPieces={150} />)}
       <Modal.Header closeButton>
         <Modal.Title>Sign Up</Modal.Title>
       </Modal.Header>
