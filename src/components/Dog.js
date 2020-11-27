@@ -11,8 +11,6 @@ const GridWrapper = styled.div`
 `;
 
 
-
-
 export default function Dog() {
 
     const [dogs, setDogs] = useState([]);
@@ -21,10 +19,17 @@ export default function Dog() {
 
     }, [])
 
+    const loadMore = (e) => {
+        e.preventDefault()
+        memeFacade.getDogs().then(res => setDogs([...dogs, ...res])
+        )
+    }
+
 
     return (
         <GridWrapper>
             <Content memes={dogs} />
+            <Button onClick={loadMore} className="btn btn-secondary">Load more</Button>
         </GridWrapper>
 
     )
