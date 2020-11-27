@@ -9,6 +9,7 @@ export default function Register({ handleShowRegister, showRegister }) {
   const [user, setUser] = useState(initialState);
   const [error, setError] = useState("");
   const [msg, setMsg] = useState("");
+  const [success, setSuccess] = useState(false);
 
   const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -23,7 +24,7 @@ export default function Register({ handleShowRegister, showRegister }) {
       if (user.username !== "" || user.password !== "") {
         apiFacade
           .register(user)
-          .then((res) => setMsg(`${res.username} has been registered.`))
+          .then((res) => setMsg(`${res.username} has been registered.`)).then(setSuccess(true))
           .catch((promise) => {
             promise.fullError.then((error) => {
               setError(error.message);
@@ -38,7 +39,8 @@ export default function Register({ handleShowRegister, showRegister }) {
 
   return (
     <Modal show={showRegister} onHide={handleShowRegister}>
-      <Confetti width={498} height={327} opacity={0.7} numberOfPieces={150} />
+      {success && (
+        <Confetti width={498} height={327} opacity={0.7} numberOfPieces={150} />)}
       <Modal.Header closeButton>
         <Modal.Title>Sign Up</Modal.Title>
       </Modal.Header>
