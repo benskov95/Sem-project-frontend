@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom"
 import memeFacade from "../facades/memeFacade"
 
 
-export default function Comment ({meme}) {
+export default function Comment ({meme, isOpen}) {
 
     const [comments, setComments] = useState([])
 
@@ -16,9 +16,15 @@ export default function Comment ({meme}) {
 
     return(
         <div>
-        {comments.map(comment => <li key={meme.id}>{comment.comment}</li>)}
-        <input></input>
-        </div>
+        {isOpen ? (
+           <div>
+            {comments.map(comment => <li key={meme.id}>{comment.comment}</li>)}
+            <input></input>
+            </div>
+
+
+        ) : ""}
+       </div>
     ) 
        
 

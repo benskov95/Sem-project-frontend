@@ -18,8 +18,13 @@ export default function Content({ meme, hasVotes, isLoggedIn }) {
     const [msg, setMsg] = useState("");
     const [voteType, setVoteType] = useState("none");
     const [votes, setVotes] = useState({});
+    const [isOpen, setIsOpen] = useState(false);
     let username = localStorage.getItem("user");
-    let url = useRouteMatch()
+    let {url}= useRouteMatch()
+
+    const toggle = () => {
+      setIsOpen(!isOpen)
+    }
 
     useEffect(() => {
       setMsg("");
@@ -87,28 +92,32 @@ export default function Content({ meme, hasVotes, isLoggedIn }) {
             icon={faSnowflake}
             style={voteType === "down" ? { color: "lightblue" } : { color: "black" }}
             size="2x" />
+
             
-            
-            <Link to={`${url}/${meme.meme_id}`}> 
-            <FontAwesomeIcon
-             size="2x"
-             icon={faCommentDots} 
-              />
-            </Link>
-           <Switch>
-            <Route exact path={`${url}/${meme.meme_id}`}>
-              <Comment meme={meme}/>
-            </Route>
-            </Switch>
-          <br />
-          
-                      {hasVotes ? (
+                {hasVotes ? (
                         <p className="counter">{votes.downvotes}</p>
                       ) : ""}
                     <p className="voteText" style={!isLoggedIn ? {color: "red"} : {color: "black"}}>
                       {msg}
                     </p>
                     <br />
+            
+            
+            <Link to={`${url}/${meme.meme_id}`}> 
+            <FontAwesomeIcon
+             onClick={toggle}
+             size="2x"
+             icon={faCommentDots} 
+             style={{color: "black", float: "right"}}
+              />
+            </Link>
+           <Switch>
+            <Route exact path={`${url}/${meme.meme_id}`}>
+              <Comment meme={meme} isOpen={isOpen}/>
+            </Route>
+            </Switch>
+          <br />
+          
        </div> 
       )
      
