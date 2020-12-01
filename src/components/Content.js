@@ -3,17 +3,27 @@ import "../styles/Meme.css";
 import {faCommentDots,faFire, faSnowflake } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {Button} from "react-bootstrap"
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useRouteMatch,
+} from "react-router-dom";
+import Comment from "./Comment"
 
 export default function Content({ meme, loadMore }) {
    
     const [msg, setMsg] = useState("");
     const [voteType, setVoteType] = useState("none");
-  
+    let { path, url } = useRouteMatch();
+
     const vote = (e) => {
       let voteInfoArray = e.currentTarget.id.split("_");
       let type = voteInfoArray[0];
-      let url = voteInfoArray[1];
+      let image_url = voteInfoArray[1];
       let voteCount = voteInfoArray[2];
+      
   
       if (type === "up") {
         if (voteType === "up") {
@@ -54,10 +64,19 @@ export default function Content({ meme, loadMore }) {
             style={voteType === "down" ? { color: "lightblue" } : { color: "black" }}
             size="2x" />
           <p className="voteText">{msg}</p>
-          <FontAwesomeIcon
-          size="2x"
-          icon={faCommentDots} 
-          ></FontAwesomeIcon>
+            
+            
+            <Link to={`${url}/${meme.meme_id}`}> 
+            <FontAwesomeIcon
+             size="2x"
+             icon={faCommentDots} 
+              />
+            </Link>
+           <Switch>
+            <Route exact path={`${url}/${meme.meme_id}`}>
+              <Comment meme={meme}/>
+            </Route>
+            </Switch>
           <br />
        </div> 
       )
