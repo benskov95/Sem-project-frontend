@@ -17,7 +17,7 @@ import PrivateRoute from "./PrivateRoute";
 import BornGag from "../images/BornGag.png";
 import apiFacade from "../base-facades/apiFacade";
 import { ThemeProvider } from "styled-components";
-import { GlobalStyles } from "../components/globalStyles";
+import { GlobalStyles } from "../components/GlobalStyles";
 import { lightTheme, darkTheme } from "../components/Theme"
 import Dog from '../components/Dog';
 import EditUser from "../components/EditUser"
