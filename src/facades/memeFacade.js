@@ -23,7 +23,16 @@ const memeFacade = () => {
       .then(handleHttpErrors)
   }
 
-  return { getMeme, getCat, getYon, getDogs };
+  const getComments = (id ,meme) => {
+    return fetch(URL + `/api/memes/comment/${id}`, apiFacade.makeOptions("GET", true, meme))
+    .then(handleHttpErrors)
+  }
+
+  const addComment = (meme) => {
+    return fetch(URL + `/api/memes/comment`, apiFacade.makeOptions("POST", true, meme))
+  }
+
+  return { getMeme, getCat, getYon, getDogs, getComments, addComment };
 };
 
 const facade = memeFacade();

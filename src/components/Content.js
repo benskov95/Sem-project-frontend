@@ -1,6 +1,6 @@
 import React ,{useState} from "react"
 import "../styles/Meme.css";
-import { faFire, faSnowflake } from "@fortawesome/free-solid-svg-icons"
+import {faCommentDots,faFire, faSnowflake } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {Button} from "react-bootstrap"
 
@@ -54,6 +54,10 @@ export default function Content({ meme, loadMore }) {
             style={voteType === "down" ? { color: "lightblue" } : { color: "black" }}
             size="2x" />
           <p className="voteText">{msg}</p>
+          <FontAwesomeIcon
+          size="2x"
+          icon={faCommentDots} 
+          ></FontAwesomeIcon>
           <br />
        </div> 
       )
