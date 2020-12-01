@@ -16,11 +16,13 @@ function apiFacade() {
     return localStorage.getItem("jwtToken");
   };
 
-  const setUserAndRoles = (token) => {
-    let userFromToken = JSON.parse(atob(token.split(".")[1]));
+  const setUserAndRoles = (data) => {
+    let userFromToken = JSON.parse(atob(data.token.split(".")[1]));
     localStorage.setItem("user", userFromToken.sub);
     localStorage.setItem("roles", userFromToken.roles);
     localStorage.setItem("profilePicture", userFromToken.profilePicture);
+    localStorage.setItem("upvotedMemes", JSON.stringify(data.upvotedMemes));
+    localStorage.setItem("downvotedMemes", JSON.stringify(data.downvotedMemes));
   };
 
   const loggedIn = () => {
@@ -33,6 +35,8 @@ function apiFacade() {
     localStorage.removeItem("user");
     localStorage.removeItem("roles");
     localStorage.removeItem("profilePicture")
+    localStorage.removeItem("upvotedMemes");
+    localStorage.removeItem("downvotedMemes");
   };
 
   const login = (user) => {
@@ -43,7 +47,8 @@ function apiFacade() {
     return fetch(URL + "/api/login", options)
       .then(handleHttpErrors)
       .then((res) => {
-        setUserAndRoles(res.token, res.profilePicture);
+        console.log(res)
+        setUserAndRoles(res);
         setToken(res.token);
       });
   };
