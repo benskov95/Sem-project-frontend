@@ -23,7 +23,17 @@ const memeFacade = () => {
       .then(handleHttpErrors)
   }
 
-  return { getMeme, getCat, getYon, getDogs };
+  const getColdList = () => {
+    return fetch(URL + "/api/memes/cold", apiFacade.makeOptions("GET", true))
+      .then(handleHttpErrors)
+  }
+
+  const getHotList = () => {
+    return fetch(URL + "/api/memes/hot", apiFacade.makeOptions("GET", true))
+      .then(handleHttpErrors)
+  }
+
+  return { getMeme, getCat, getYon, getDogs, getColdList, getHotList };
 };
 
 const facade = memeFacade();
