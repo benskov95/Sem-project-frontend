@@ -23,7 +23,6 @@
     margin-right: 12px;
     cursor: pointer;
     border: none;
-    background-color: #E2E2E2;
     outline: none;
     border: none;
 }
@@ -32,5 +31,13 @@
     float: left;
     margin-top: 5px;
     margin-left: 5px;
+    font-size: 20px;
+}
+
+.counter {
+    float: left;
+    margin-top: 12px;
+    margin-left: -2px;
+    margin-right: 10px;
     font-size: 20px;
 }
