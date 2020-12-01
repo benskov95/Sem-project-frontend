@@ -16,11 +16,11 @@ function apiFacade() {
     return localStorage.getItem("jwtToken");
   };
 
-  const setUserAndRoles = (token, profilePicture) => {
+  const setUserAndRoles = (token) => {
     let userFromToken = JSON.parse(atob(token.split(".")[1]));
     localStorage.setItem("user", userFromToken.sub);
     localStorage.setItem("roles", userFromToken.roles);
-    localStorage.setItem("profilePicture", profilePicture);
+    localStorage.setItem("profilePicture", userFromToken.profilePicture);
   };
 
   const loggedIn = () => {
