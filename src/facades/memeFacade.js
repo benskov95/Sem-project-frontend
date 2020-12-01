@@ -31,6 +31,7 @@ const memeFacade = () => {
 
   const addComment = (meme) => {
     return fetch(URL + `/api/memes/comment`, apiFacade.makeOptions("POST", true, meme))
+    .then(handleHttpErrors)
   }
 
 

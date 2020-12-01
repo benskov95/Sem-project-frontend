@@ -26,6 +26,7 @@ import Cold from "../components/Cold";
 
 
 
+
 const Styles = styled.div`
  
   .navbar { background-color: #333;
