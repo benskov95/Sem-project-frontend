@@ -43,6 +43,18 @@ class SideNav extends React.Component {
                     css: 'fas fa-balance-scale',
                     key: 4
                 },
+                {
+                    path: 'hot',
+                    name: 'Hot',
+                    css: 'fas fa-fire',
+                    key: 5
+                },
+                {
+                    path: '/cold',
+                    name: 'Cold',
+                    css: 'fas fa-snowflake',
+                    key: 6
+                }
 
             ]
         }

@@ -23,6 +23,7 @@ const memeFacade = () => {
       .then(handleHttpErrors)
   }
 
+
   const getComments = (id ,meme) => {
     return fetch(URL + `/api/memes/comment/${id}`, apiFacade.makeOptions("GET", true, meme))
     .then(handleHttpErrors)
@@ -32,8 +33,20 @@ const memeFacade = () => {
     return fetch(URL + `/api/memes/comment`, apiFacade.makeOptions("POST", true, meme))
   }
 
-  return { getMeme, getCat, getYon, getDogs, getComments, addComment };
-};
 
-const facade = memeFacade();
-export default facade;
+  const getColdList = () => {
+    return fetch(URL + "/api/memes/cold", apiFacade.makeOptions("GET", true))
+      .then(handleHttpErrors)
+  }
+
+  const getHotList = () => {
+    return fetch(URL + "/api/memes/hot", apiFacade.makeOptions("GET", true))
+      .then(handleHttpErrors)
+  }
+
+  return { getMeme, getCat, getYon, getDogs,getComments, addComment, getColdList, getHotList };
+
+}
+
+ const facade = memeFacade();
+ export default facade;

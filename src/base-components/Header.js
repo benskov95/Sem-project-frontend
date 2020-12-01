@@ -17,10 +17,12 @@ import PrivateRoute from "./PrivateRoute";
 import BornGag from "../images/BornGag.png";
 import apiFacade from "../base-facades/apiFacade";
 import { ThemeProvider } from "styled-components";
-import { GlobalStyles } from "../components/globalStyles";
+import { GlobalStyles } from "../components/GlobalStyles";
 import { lightTheme, darkTheme } from "../components/Theme"
 import Dog from '../components/Dog';
 import EditUser from "../components/EditUser"
+import Hot from "../components/Hot";
+import Cold from "../components/Cold";
 
 
 
@@ -173,6 +175,8 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
         <Route path="/cat" component={Cat} />
         <Route path="/yesorno" component={YesOrNo} />
         <Route path="/dog" component={Dog} />
+        <Route path="/hot" component={Hot} />
+        <Route path="/cold" component={Cold} />
         <Route component={NoMatch} />
       </Switch>
 
