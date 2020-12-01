@@ -23,7 +23,19 @@ const memeFacade = () => {
       .then(handleHttpErrors)
   }
 
-  return { getMeme, getCat, getYon, getDogs };
+  const upvoteMeme = (username, imageUrl) => {
+    return fetch(URL + `/api/memes/upvote/${username}`, 
+    apiFacade.makeOptions("POST", true, {imageUrl: imageUrl}))
+    .then(handleHttpErrors);
+  }
+
+  const downvoteMeme = (username, imageUrl) => {
+    return fetch(URL + `/api/memes/downvote/${username}`, 
+    apiFacade.makeOptions("POST", true, {imageUrl: imageUrl}))
+    .then(handleHttpErrors);
+  }
+
+  return { getMeme, getCat, getYon, getDogs, upvoteMeme, downvoteMeme };
 };
 
 const facade = memeFacade();

@@ -17,7 +17,7 @@ import PrivateRoute from "./PrivateRoute";
 import BornGag from "../images/BornGag.png";
 import apiFacade from "../base-facades/apiFacade";
 import { ThemeProvider } from "styled-components";
-import { GlobalStyles } from "../components/globalStyles";
+import { GlobalStyles } from "../components/GlobalStyles";
 import { lightTheme, darkTheme } from "../components/Theme"
 import Dog from '../components/Dog';
 import EditUser from "../components/EditUser"
@@ -53,7 +53,6 @@ const Styles = styled.div`
 
 
 export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
-  const [content, setContent] = useState([]);
   let user = isLoggedIn ? localStorage.getItem("user") : "";
   let roles = isLoggedIn ? localStorage.getItem("roles") : "";
   let profilePicture = isLoggedIn ? localStorage.getItem("profilePicture") : "";
@@ -78,16 +77,6 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
   const toggleUserOptions = () => {
     handleShowEdit();
   }
-
-  useEffect(() => {
-    fetch("https://meme-api.herokuapp.com/gimme/1")
-      .then(res => res.json())
-      .then(data => {
-        let test = [...data.memes];
-        test.forEach(meme => meme.votes = 0);
-        setContent([...test])
-      })
-  }, [])
 
   return (
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
@@ -139,6 +128,7 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
               <Nav.Item style={{ position: 'fixed', right: 0, marginRight: "15px" }}>
                 {isLoggedIn &&
                   <img src={profilePicture}
+                    alt="https://cdn2.iconfinder.com/data/icons/image-1/64/Image-12-512.png"
                     onClick={toggleUserOptions}
                     style={{
                       height: "30px",
