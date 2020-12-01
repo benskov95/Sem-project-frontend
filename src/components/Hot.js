@@ -28,7 +28,7 @@ export default function Hot() {
 
     return (
         <GridWrapper>
-            {hotList.map(hotListItem => <Content meme={hotListItem} key={hotListItem.imageUrl} loadMore={loadMore} />)}
+            {hotList.map(hotListItem => <Content hasVotes={true} meme={hotListItem} key={hotListItem.imageUrl} loadMore={loadMore} />)}
             <Button onClick={loadMore} className="btn btn-secondary">Load more</Button>
         </GridWrapper>
 

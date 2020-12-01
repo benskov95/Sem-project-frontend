@@ -1,23 +1,43 @@
 import React ,{useEffect, useState} from "react";
 import "../styles/Meme.css";
-import { faFire, faSnowflake } from "@fortawesome/free-solid-svg-icons";
+import {faCommentDots,faFire, faSnowflake } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {Button} from "react-bootstrap"
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useRouteMatch,
+} from "react-router-dom";
+import Comment from "./Comment"
 import memeFacade from "../facades/memeFacade";
+
 
 export default function Content({ meme, hasVotes, isLoggedIn }) {
     const [msg, setMsg] = useState("");
     const [voteType, setVoteType] = useState("none");
     const [votes, setVotes] = useState({});
+    const [isOpen, setIsOpen] = useState(false);
     let username = localStorage.getItem("user");
+    let {url}= useRouteMatch()
+
+    const toggle = () => {
+      setIsOpen(!isOpen)
+    }
 
     useEffect(() => {
       setMsg("");
       setVoteType("none")
     }, [isLoggedIn]);
 
+
     const vote = (e) => {
       let voteInfoArray = e.currentTarget.id.split("_");
       let type = voteInfoArray[0];
+
+      
+
   
       if (type === "up") {
         if (voteType === "up") {
@@ -72,15 +92,35 @@ export default function Content({ meme, hasVotes, isLoggedIn }) {
             icon={faSnowflake}
             style={voteType === "down" ? { color: "lightblue" } : { color: "black" }}
             size="2x" />
-            {hasVotes ? (
-              <p className="counter">{votes.downvotes}</p>
-            ) : ""}
-          <p className="voteText" style={!isLoggedIn ? {color: "red"} : {color: "black"}}>
-            {msg}
-          </p>
+
+            
+                {hasVotes ? (
+                        <p className="counter">{votes.downvotes}</p>
+                      ) : ""}
+                    <p className="voteText" style={!isLoggedIn ? {color: "red"} : {color: "black"}}>
+                      {msg}
+                    </p>
+                    <br />
+            
+            
+            <Link to={`${url}/${meme.meme_id}`}> 
+            <FontAwesomeIcon
+             onClick={toggle}
+             size="2x"
+             icon={faCommentDots} 
+             style={{color: "black", float: "right"}}
+              />
+            </Link>
+           <Switch>
+            <Route exact path={`${url}/${meme.meme_id}`}>
+              <Comment meme={meme} isOpen={isOpen}/>
+            </Route>
+            </Switch>
           <br />
+          
        </div> 
       )
+     
   }
 
 const printError = (promise, setError) => {
@@ -88,3 +128,4 @@ const printError = (promise, setError) => {
     setError(`${status.message}`);
   });
 };
+

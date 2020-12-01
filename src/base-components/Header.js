@@ -155,7 +155,11 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
         <Route path="/dog">
           <Dog isLoggedIn={isLoggedIn} />
         </Route>
+        <Route path="/hot" component={Hot}/>
+        <Route path="/cold" component={Cold}/>
         <Route component={NoMatch} />
+        
+        
       </Switch>
 
       <Modal show={showEdit} onHide={handleShowEdit}>

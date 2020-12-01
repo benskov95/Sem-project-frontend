@@ -44,7 +44,7 @@ class SideNav extends React.Component {
                     key: 4
                 },
                 {
-                    path: 'hot',
+                    path: '/hot',
                     name: 'Hot',
                     css: 'fas fa-fire',
                     key: 5
