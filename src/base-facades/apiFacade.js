@@ -47,7 +47,6 @@ function apiFacade() {
     return fetch(URL + "/api/login", options)
       .then(handleHttpErrors)
       .then((res) => {
-        console.log(res)
         setUserAndRoles(res);
         setToken(res.token);
       });
