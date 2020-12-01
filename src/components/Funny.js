@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import { LOCAL_URL } from "../utils/settings";
 import "../styles/Meme.css";
-import { faFire, faSnowflake } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from 'styled-components';
 import memeFacade from "../facades/memeFacade"
 import Content from "./Content"
@@ -18,7 +16,7 @@ const GridWrapper = styled.div`
 
 export let URL = LOCAL_URL;
 
-export default function Funny() {
+export default function Funny({isLoggedIn}) {
   const [funnys, setFunnys] = useState([])
 
   useEffect(() => {
@@ -34,7 +32,13 @@ export default function Funny() {
 
   return (
     <GridWrapper>
-    {funnys.map(funny => <Content meme={funny} key={funnys.indexOf(funny)} loadMore={loadMore} />)}
+    {funnys.map(funny => 
+    <Content 
+    meme={funny} 
+    key={funnys.indexOf(funny)} 
+    loadMore={loadMore} 
+    hasVotes={false}
+    isLoggedIn={isLoggedIn}/>)}
           <Button onClick={loadMore} className="btn btn-secondary">Load more</Button>
   </GridWrapper>
   )

@@ -23,15 +23,15 @@ const memeFacade = () => {
       .then(handleHttpErrors)
   }
 
-  const upvoteMeme = (username, imageUrl) => {
+  const upvoteMeme = (username, meme) => {
     return fetch(URL + `/api/memes/upvote/${username}`, 
-    apiFacade.makeOptions("POST", true, {imageUrl: imageUrl}))
+    apiFacade.makeOptions("POST", true, meme))
     .then(handleHttpErrors);
   }
 
-  const downvoteMeme = (username, imageUrl) => {
+  const downvoteMeme = (username, meme) => {
     return fetch(URL + `/api/memes/downvote/${username}`, 
-    apiFacade.makeOptions("POST", true, {imageUrl: imageUrl}))
+    apiFacade.makeOptions("POST", true, meme))
     .then(handleHttpErrors);
   }
 

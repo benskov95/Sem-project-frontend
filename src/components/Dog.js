@@ -11,7 +11,7 @@ const GridWrapper = styled.div`
 `;
 
 
-export default function Dog() {
+export default function Dog({isLoggedIn}) {
 
     const [dogs, setDogs] = useState([]);
     useEffect(() => {
@@ -28,7 +28,14 @@ export default function Dog() {
 
     return (
         <GridWrapper>
-           {dogs.map(dog => <Content meme={dog} key={dog.imageUrl} loadMore={loadMore} />)}
+           {dogs.map(dog => 
+           <Content 
+           meme={dog} 
+           key={dog.imageUrl} 
+           loadMore={loadMore} 
+           hasVotes={false}
+           isLoggedIn={isLoggedIn}
+           />)}
           <Button onClick={loadMore} className="btn btn-secondary">Load more</Button>
         </GridWrapper>
 

@@ -2,7 +2,7 @@ import { Nav, Navbar, Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import "../styles/App.css";
 import "../styles/Navbar.css";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Switch, Route, NavLink, Redirect } from "react-router-dom";
 import { Login } from "./Login";
 import Funny from "../components/Funny";
@@ -114,21 +114,11 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
                       onClick={handleShowRegister}>Register</Button>
                     <Register handleShowRegister={handleShowRegister} showRegister={showRegister} /></Nav.Item>
                 </React.Fragment>
-              ) : //<Nav.Item>
-                //   <Button style={{ 
-                //     background: "#333333", 
-                //     border: "none", 
-                //     outline: "none", 
-                //     position: 'absolute', 
-                //     right: 100}} 
-                //     onClick={logout}>{loginMsg}</Button>
-                //   </Nav.Item> 
-                ""
-              }
+              ) : ""}
               <Nav.Item style={{ position: 'fixed', right: 0, marginRight: "15px" }}>
                 {isLoggedIn &&
                   <img src={profilePicture}
-                    alt="https://cdn2.iconfinder.com/data/icons/image-1/64/Image-12-512.png"
+                    alt=""
                     onClick={toggleUserOptions}
                     style={{
                       height: "30px",
@@ -154,15 +144,18 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
         <PrivateRoute path="/example" isLoggedIn={isLoggedIn} component={Example} />
         <PrivateRoute path="/admin" isLoggedIn={isLoggedIn} component={Admin} />
 
-        <Route exact path="/" component={Funny}>
-          <div><br />
-            <h1>Memes</h1><br />
-            <Funny />
-          </div>
+        <Route exact path="/">
+          <Funny isLoggedIn={isLoggedIn} />
         </Route>
-        <Route path="/cat" component={Cat} />
-        <Route path="/yesorno" component={YesOrNo} />
-        <Route path="/dog" component={Dog} />
+        <Route path="/cat">
+          <Cat isLoggedIn={isLoggedIn} />
+        </Route>
+        <Route path="/yesorno">
+          <YesOrNo isLoggedIn={isLoggedIn} />
+        </Route>
+        <Route path="/dog">
+          <Dog isLoggedIn={isLoggedIn} />
+        </Route>
         <Route component={NoMatch} />
       </Switch>
 

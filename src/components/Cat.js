@@ -13,7 +13,7 @@ const GridWrapper = styled.div`
 
 
 
-export default function Cat() {
+export default function Cat({isLoggedIn}) {
 
     const [cats, setCats] = useState([])
 
@@ -30,7 +30,14 @@ export default function Cat() {
 
     return (
         <GridWrapper>
-          {cats.map(cat => <Content meme={cat} key={cat.imageUrl} loadMore={loadMore} />)}
+          {cats.map(cat => 
+          <Content 
+          meme={cat} 
+          key={cat.imageUrl} 
+          loadMore={loadMore} 
+          hasVotes={false}
+          isLoggedIn={isLoggedIn}
+          />)}
           <Button onClick={loadMore} className="btn btn-secondary">Load more</Button>
         </GridWrapper>
     );

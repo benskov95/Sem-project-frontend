@@ -4,13 +4,13 @@ import { faFire, faSnowflake } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import memeFacade from "../facades/memeFacade";
 
-export default function Content({ meme }) {
+export default function Content({ meme, hasVotes, isLoggedIn }) {
    
     const [msg, setMsg] = useState("");
     const [voteType, setVoteType] = useState("none");
     const [votes, setVotes] = useState({});
     let username = localStorage.getItem("user");
-  
+
     const vote = (e) => {
       let voteInfoArray = e.currentTarget.id.split("_");
       let type = voteInfoArray[0];
@@ -18,23 +18,31 @@ export default function Content({ meme }) {
   
       if (type === "up") {
         if (voteType === "up") {
+          setMsg("");
           setVoteType("none");
         } else {
+          if (!hasVotes) {
+            setMsg("Upvoted")
+          }
           setVoteType(type);
         }
 
-        memeFacade.upvoteMeme(username, url)
+        memeFacade.upvoteMeme(username, meme)
         .then(res => setVotes({ ...res}))
         .catch(err => printError(err, setMsg)); 
 
       } else if (type === "down") {
         if (voteType === "down") {
+          setMsg("");
           setVoteType("none");
         } else {
+          if (!hasVotes) {
+            setMsg("Downvoted")
+          }
           setVoteType(type);
         }
 
-        memeFacade.downvoteMeme(username, url)
+        memeFacade.downvoteMeme(username, meme)
         .then(res => setVotes({ ...res}))
         .catch(err => printError(err, setMsg));    
       }
@@ -51,7 +59,9 @@ export default function Content({ meme }) {
             icon={faFire}
             style={voteType === "up" ? { color: "red" } : { color: "black" }}
             size="2x" />
-          <p className="counter">{votes.upvotes}</p>
+            {hasVotes ? (
+              <p className="counter">{votes.upvotes}</p>
+            ) : ""}
           <FontAwesomeIcon
             id={"down_" + meme.imageUrl}
             onClick={vote}
@@ -59,8 +69,12 @@ export default function Content({ meme }) {
             icon={faSnowflake}
             style={voteType === "down" ? { color: "lightblue" } : { color: "black" }}
             size="2x" />
-          <p className="counter">{votes.downvotes}</p>
-          <p className="voteText">{msg}</p>
+            {hasVotes ? (
+              <p className="counter">{votes.downvotes}</p>
+            ) : ""}
+          <p className="voteText" style={!isLoggedIn ? {color: "red"} : {color: "black"}}>
+            {msg}
+          </p>
           <br />
        </div> 
       )
