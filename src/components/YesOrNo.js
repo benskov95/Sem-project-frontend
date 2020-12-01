@@ -12,7 +12,7 @@ const GridWrapper = styled.div`
 
 
 
-export default function YesOrNo() {
+export default function YesOrNo({isLoggedIn}) {
 
     const [yons, setYons] = useState([])
 
@@ -29,7 +29,14 @@ export default function YesOrNo() {
 
     return (
         <GridWrapper>
-           {yons.map(yon => <Content meme={yon} key={yon.imageUrl} loadMore={loadMore} />)}
+           {yons.map(yon => 
+           <Content 
+           meme={yon} 
+           key={yon.imageUrl} 
+           loadMore={loadMore} 
+           hasVotes={false}
+           isLoggedIn={isLoggedIn}
+           />)}
           <Button onClick={loadMore} className="btn btn-secondary">Load more</Button>
         </GridWrapper>
     );

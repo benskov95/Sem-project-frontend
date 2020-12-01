@@ -2,7 +2,7 @@ import { Nav, Navbar, Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import "../styles/App.css";
 import "../styles/Navbar.css";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Switch, Route, NavLink, Redirect } from "react-router-dom";
 import { Login } from "./Login";
 import Funny from "../components/Funny";
@@ -55,7 +55,6 @@ const Styles = styled.div`
 
 
 export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
-  const [content, setContent] = useState([]);
   let user = isLoggedIn ? localStorage.getItem("user") : "";
   let roles = isLoggedIn ? localStorage.getItem("roles") : "";
   let profilePicture = isLoggedIn ? localStorage.getItem("profilePicture") : "";
@@ -80,16 +79,6 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
   const toggleUserOptions = () => {
     handleShowEdit();
   }
-
-  useEffect(() => {
-    fetch("https://meme-api.herokuapp.com/gimme/1")
-      .then(res => res.json())
-      .then(data => {
-        let test = [...data.memes];
-        test.forEach(meme => meme.votes = 0);
-        setContent([...test])
-      })
-  }, [])
 
   return (
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
@@ -127,20 +116,11 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
                       onClick={handleShowRegister}>Register</Button>
                     <Register handleShowRegister={handleShowRegister} showRegister={showRegister} /></Nav.Item>
                 </React.Fragment>
-              ) : //<Nav.Item>
-                //   <Button style={{ 
-                //     background: "#333333", 
-                //     border: "none", 
-                //     outline: "none", 
-                //     position: 'absolute', 
-                //     right: 100}} 
-                //     onClick={logout}>{loginMsg}</Button>
-                //   </Nav.Item> 
-                ""
-              }
+              ) : ""}
               <Nav.Item style={{ position: 'fixed', right: 0, marginRight: "15px" }}>
                 {isLoggedIn &&
                   <img src={profilePicture}
+                    alt=""
                     onClick={toggleUserOptions}
                     style={{
                       height: "30px",
@@ -166,17 +146,18 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
         <PrivateRoute path="/example" isLoggedIn={isLoggedIn} component={Example} />
         <PrivateRoute path="/admin" isLoggedIn={isLoggedIn} component={Admin} />
 
-        <Route exact path="/" component={Funny}>
-          <div><br />
-            <h1>Memes</h1><br />
-            <Funny />
-          </div>
+        <Route exact path="/">
+          <Funny isLoggedIn={isLoggedIn} />
         </Route>
-        <Route path="/cat" component={Cat} />
-        <Route path="/yesorno" component={YesOrNo} />
-        <Route path="/dog" component={Dog} />
-        <Route path="/hot" component={Hot} />
-        <Route path="/cold" component={Cold} />
+        <Route path="/cat">
+          <Cat isLoggedIn={isLoggedIn} />
+        </Route>
+        <Route path="/yesorno">
+          <YesOrNo isLoggedIn={isLoggedIn} />
+        </Route>
+        <Route path="/dog">
+          <Dog isLoggedIn={isLoggedIn} />
+        </Route>
         <Route component={NoMatch} />
       </Switch>
 

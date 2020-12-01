@@ -33,7 +33,28 @@ const memeFacade = () => {
       .then(handleHttpErrors)
   }
 
-  return { getMeme, getCat, getYon, getDogs, getColdList, getHotList };
+  const upvoteMeme = (username, meme) => {
+    return fetch(URL + `/api/memes/upvote/${username}`, 
+    apiFacade.makeOptions("POST", true, meme))
+    .then(handleHttpErrors);
+  }
+
+  const downvoteMeme = (username, meme) => {
+    return fetch(URL + `/api/memes/downvote/${username}`, 
+    apiFacade.makeOptions("POST", true, meme))
+    .then(handleHttpErrors);
+  }
+
+  return { 
+    getMeme, 
+    getCat, 
+    getYon, 
+    getDogs, 
+    upvoteMeme, 
+    downvoteMeme, 
+    getColdList, 
+    getHotList 
+  };
 };
 
 const facade = memeFacade();
