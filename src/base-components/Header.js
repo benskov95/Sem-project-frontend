@@ -21,9 +21,6 @@ import { GlobalStyles } from "../components/GlobalStyles";
 import { lightTheme, darkTheme } from "../components/Theme"
 import Dog from '../components/Dog';
 import EditUser from "../components/EditUser"
-import Hot from "../components/Hot";
-import Cold from "../components/Cold";
-
 
 
 const Styles = styled.div`
