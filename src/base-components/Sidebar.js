@@ -13,6 +13,7 @@ const StyledSideNav = styled.div`
     padding-top: 10px;
 `;
 
+
 class SideNav extends React.Component {
     constructor(props) {
         super(props);
@@ -59,7 +60,7 @@ class SideNav extends React.Component {
                     path: '/favorite',
                     name: 'Favorite',
                     css: 'fas fa-thumbs-up',
-                    key: 6
+                    key: 7
                 }
 
             ]

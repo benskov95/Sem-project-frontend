@@ -13,15 +13,17 @@ const GridWrapper = styled.div`
 
 export default function Favorite({ user }) {
 
+    let username = localStorage("user");
+
     const [favoriteList, setFavoriteList] = useState([]);
     useEffect(() => {
-        memeFacade.getFavoriteList().then(res => setFavoriteList(res))
+        memeFacade.getFavoriteList(username).then(res => setFavoriteList(res))
 
     }, [])
 
     const loadMore = (e) => {
         e.preventDefault()
-        memeFacade.getFavoriteList().then(res => setFavoriteList([...favoriteList, ...res])
+        memeFacade.getFavoriteList(username).then(res => setFavoriteList([...favoriteList, ...res])
         )
     }
 
