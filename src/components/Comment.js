@@ -1,6 +1,6 @@
 import {useEffect ,useState } from "react"
 import memeFacade from "../facades/memeFacade"
-import { Button, Comment, Form, Header } from 'semantic-ui-react'
+import { Button, Comment, Form, Header, Container } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 import {useParams} from "react-router-dom"
 
@@ -35,16 +35,17 @@ export default function Comments () {
             refresh.push(res)
             setComments(refresh)
             setNewComment({"username" : username, "comment" : "", "meme_id" : meme_id})
-            
         })
    }
     
 
     return(
-        <div className="comment">
+        <Container style={{ margin: 100 }}>
+        <div className="content">
       <img className="meme-img" src={meme.imageUrl} alt="" />
     <Comment.Group size="large"> 
     {comments.map(comment => 
+    <div className="container" style={{border: "1px solid black"}}>
     <Comment>
       <Comment.Avatar as='a' src={comment.profilePicture} />
       <Comment.Content>
@@ -57,6 +58,10 @@ export default function Comments () {
         </Comment.Text>
       </Comment.Content>
     </Comment>
+    <br></br>
+    </div>
+  
+    
    )}
     <Form reply onSubmit={handleSubmit}>
       <Form.TextArea onChange={handleChange} name={"comment"} value={newComment.comment}/>
@@ -64,6 +69,7 @@ export default function Comments () {
     </Form>
   </Comment.Group>
   </div>
+  </Container>
 )
        
 
