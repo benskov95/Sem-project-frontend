@@ -107,6 +107,7 @@ export default function Content({ meme, hasVotes, isLoggedIn }) {
                   {msg}
                 </p>
                 <br />
+                
             {hasVotes && (
             <Link to={`/comment/${meme.meme_id}`}> 
 

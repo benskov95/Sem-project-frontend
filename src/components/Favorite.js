@@ -28,7 +28,7 @@ export default function Favorite({ user }) {
 
     return (
         <GridWrapper>
-            {favoriteList.map(favoriteListItem => <Content meme={favoriteListItem} key={favoriteListItem.imageUrl} loadMore={loadMore} />)}
+            {favoriteList.map(favoriteListItem => <Content meme={favoriteListItem} key={favoriteListItem.imageUrl} loadMore={loadMore} hasVotes={true}/>)}
             <Button onClick={loadMore} className="btn btn-secondary">Load more</Button>
         </GridWrapper>
 
