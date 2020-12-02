@@ -5,6 +5,14 @@
     margin-bottom: 100px;
 }
 
+.comment {
+    margin-left: auto;
+    margin-right: auto;
+    width: 500px;
+    margin-top: 100px;
+    
+}
+
 .meme-img {
     border: 2px solid rgba(0, 0, 0, 0.103);
     width: inherit;

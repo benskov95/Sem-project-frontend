@@ -10,7 +10,6 @@ import {
   Link,
   useRouteMatch,
 } from "react-router-dom";
-import Comments from "./Comment"
 import memeFacade from "../facades/memeFacade";
 
 
@@ -18,13 +17,10 @@ export default function Content({ meme, hasVotes, isLoggedIn }) {
     const [msg, setMsg] = useState("");
     const [voteType, setVoteType] = useState("none");
     const [votes, setVotes] = useState({});
-    const [isOpen, setIsOpen] = useState(false);
     let username = localStorage.getItem("user");
-    let {url}= useRouteMatch()
+    
 
-    const toggle = () => {
-      setIsOpen(!isOpen)
-    }
+
 
     useEffect(() => {
       setMsg("");
@@ -103,19 +99,13 @@ export default function Content({ meme, hasVotes, isLoggedIn }) {
                     <br />
             
             
-            <Link to={`${url}/${meme.meme_id}`}> 
+            <Link to={`/comment/${meme.meme_id}`}> 
             <FontAwesomeIcon
-             onClick={toggle}
              size="2x"
              icon={faCommentDots} 
              style={{color: "black", float: "right"}}
               />
             </Link>
-           <Switch>
-            <Route exact path={`${url}/${meme.meme_id}`}>
-              <Comments meme={meme} isOpen={isOpen}/>
-            </Route>
-            </Switch>
           <br />
           
        </div> 

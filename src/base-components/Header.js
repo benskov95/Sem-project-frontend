@@ -23,6 +23,7 @@ import Dog from '../components/Dog';
 import EditUser from "../components/EditUser"
 import Hot from "../components/Hot";
 import Cold from "../components/Cold";
+import Comment from "../components/Comment"
 
 
 
@@ -160,6 +161,7 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
         </Route>
         <Route path="/hot" component={Hot}/>
         <Route path="/cold" component={Cold}/>
+        <Route path={`/comment/:meme_id`} component={Comment}/>
         <Route component={NoMatch} />
         
         
