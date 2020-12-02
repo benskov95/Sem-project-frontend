@@ -10,7 +10,7 @@ import {
   Link,
   useRouteMatch,
 } from "react-router-dom";
-import Comment from "./Comment"
+import Comments from "./Comment"
 import memeFacade from "../facades/memeFacade";
 
 
@@ -113,7 +113,7 @@ export default function Content({ meme, hasVotes, isLoggedIn }) {
             </Link>
            <Switch>
             <Route exact path={`${url}/${meme.meme_id}`}>
-              <Comment meme={meme} isOpen={isOpen}/>
+              <Comments meme={meme} isOpen={isOpen}/>
             </Route>
             </Switch>
           <br />

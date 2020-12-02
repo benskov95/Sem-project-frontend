@@ -2,6 +2,7 @@ import {useEffect ,useState } from "react"
 import memeFacade from "../facades/memeFacade"
 
 
+
 export default function Comment ({meme, isOpen}) {
 
     let username = localStorage.getItem("user")
