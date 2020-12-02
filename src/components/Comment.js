@@ -46,7 +46,7 @@ export default function Comments() {
         <img className="meme-img" src={meme.imageUrl} alt="" />
         <Comment.Group size="large">
           {comments.map(comment =>
-            <div className="container" style={{ border: "1px solid black" }}>
+            <div className="container" style={{ border: "1px solid black" }} key={comment.dateOfPost}>
               <Comment style={{}}>
                 <Comment.Avatar as='a' src={comment.profilePicture} />
                 <Comment.Content>

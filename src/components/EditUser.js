@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import userFacade from "../facades/userFacade";
 
 
@@ -123,6 +124,10 @@ export default function EditUser({username, profilePicture}) {
                     </form>
                     <button onClick={goBack}>Back</button>
                 </div>
+            ) : ""}
+
+            {username === "admin" ? (
+                <Link to="/admin"><button>Manage users</button></Link>
             ) : ""}
         </div>
     )

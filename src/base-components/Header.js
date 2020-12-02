@@ -6,7 +6,6 @@ import React, { useState } from "react";
 import { Switch, Route, NavLink, Redirect } from "react-router-dom";
 import { Login } from "./Login";
 import Funny from "../components/Funny";
-import Example from "../components/Example";
 import Admin from "./Admin";
 import Register from "./Register";
 import { Modal } from "react-bootstrap";
@@ -92,11 +91,6 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
           <Navbar expand="lg">
             <Navbar.Brand as={NavLink} to="/"><img src={BornGag} className="img-fluid" alt="logo" /></Navbar.Brand>
             <Nav className="auto">
-              {roles.includes("admin") && (
-                <React.Fragment>
-                  <Nav.Item ><Nav.Link as={NavLink} to="/admin">Admin</Nav.Link></Nav.Item>
-                </React.Fragment>
-              )}
               {!isLoggedIn ? (
                 <React.Fragment>
                   <Nav.Item>
@@ -147,7 +141,6 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
         <Route path="/ca3-startcode">
           <Redirect to="/" />
         </Route>
-        <PrivateRoute path="/example" isLoggedIn={isLoggedIn} component={Example} />
         <PrivateRoute path="/admin" isLoggedIn={isLoggedIn} component={Admin} />
 
         <Route exact path="/">

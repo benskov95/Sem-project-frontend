@@ -59,7 +59,7 @@ class SideNav extends React.Component {
                     path: '/favorite',
                     name: 'Favorite',
                     css: 'fas fa-thumbs-up',
-                    key: 6
+                    key: 7
                 }
 
             ]
