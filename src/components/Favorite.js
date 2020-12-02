@@ -13,7 +13,7 @@ const GridWrapper = styled.div`
 
 export default function Favorite({ user }) {
 
-    let username = localStorage("user");
+    let username = localStorage.getItem("user");
 
     const [favoriteList, setFavoriteList] = useState([]);
     useEffect(() => {
@@ -30,7 +30,7 @@ export default function Favorite({ user }) {
 
     return (
         <GridWrapper>
-            {favoriteList.map(favoriteListItem => <Content meme={favoriteListItem} key={favoriteListItem.imageUrl} loadMore={loadMore} hasVotes={true}/>)}
+            {favoriteList.map(favoriteListItem => <Content meme={favoriteListItem} key={favoriteListItem.imageUrl} loadMore={loadMore} hasVotes={true} />)}
             <Button onClick={loadMore} className="btn btn-secondary">Load more</Button>
         </GridWrapper>
 
