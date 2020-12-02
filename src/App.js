@@ -6,6 +6,7 @@ import Sidebar from './base-components/Sidebar';
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   let history = useHistory();
+  let user = isLoggedIn ? localStorage.getItem("user") : "";
 
   const setLoginStatus = (status) => {
     setIsLoggedIn(status);
@@ -19,7 +20,7 @@ export default function App() {
         loginMsg={isLoggedIn ? "Log out" : "Log in"}
         setLoginStatus={setLoginStatus}
       />
-      <Sidebar />
+      <Sidebar user={user} />
     </div>
   );
 }

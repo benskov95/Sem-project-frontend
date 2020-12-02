@@ -23,6 +23,7 @@ import Dog from '../components/Dog';
 import EditUser from "../components/EditUser"
 import Hot from "../components/Hot";
 import Cold from "../components/Cold";
+import Favorite from "../components/Favorite";
 
 
 
@@ -177,6 +178,7 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
         <Route path="/dog" component={Dog} />
         <Route path="/hot" component={Hot} />
         <Route path="/cold" component={Cold} />
+        <PrivateRoute path={`/favorite/${user}`} isLoggedIn={isLoggedIn} user={user} component={Favorite} />
         <Route component={NoMatch} />
       </Switch>
 

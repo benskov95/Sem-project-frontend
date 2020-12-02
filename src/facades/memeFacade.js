@@ -32,8 +32,12 @@ const memeFacade = () => {
     return fetch(URL + "/api/memes/hot", apiFacade.makeOptions("GET", true))
       .then(handleHttpErrors)
   }
+  const getFavoriteList = (user) => {
+    return fetch(URL + `/api/memes/favorite/${user}`, apiFacade.makeOptions("GET", true))
+      .then(handleHttpErrors)
+  }
 
-  return { getMeme, getCat, getYon, getDogs, getColdList, getHotList };
+  return { getMeme, getCat, getYon, getDogs, getColdList, getHotList, getFavoriteList };
 };
 
 const facade = memeFacade();
