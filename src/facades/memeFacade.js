@@ -49,9 +49,6 @@ const memeFacade = () => {
       .then(handleHttpErrors)
   }
 
-  return { getMeme, getCat, getYon, getDogs, getColdList, getHotList, getFavoriteList };
-
-
   const upvoteMeme = (username, meme) => {
     return fetch(URL + `/api/memes/upvote/${username}`,
       apiFacade.makeOptions("POST", true, meme))
@@ -81,7 +78,8 @@ const memeFacade = () => {
     getHotList,
     getComments,
     addComment,
-    getMemeById
+    getMemeById,
+    getFavoriteList
   };
 };
 
