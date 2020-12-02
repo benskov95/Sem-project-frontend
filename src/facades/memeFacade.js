@@ -23,6 +23,18 @@ const memeFacade = () => {
       .then(handleHttpErrors)
   }
 
+
+  const getComments = (id, meme) => {
+    return fetch(URL + `/api/memes/comment/${id}`, apiFacade.makeOptions("GET", true, meme))
+      .then(handleHttpErrors)
+  }
+
+  const addComment = (meme) => {
+    return fetch(URL + `/api/memes/comment`, apiFacade.makeOptions("POST", true, meme))
+      .then(handleHttpErrors)
+  }
+
+
   const getColdList = () => {
     return fetch(URL + "/api/memes/cold", apiFacade.makeOptions("GET", true))
       .then(handleHttpErrors)
@@ -38,7 +50,41 @@ const memeFacade = () => {
   }
 
   return { getMeme, getCat, getYon, getDogs, getColdList, getHotList, getFavoriteList };
+
+
+  const upvoteMeme = (username, meme) => {
+    return fetch(URL + `/api/memes/upvote/${username}`,
+      apiFacade.makeOptions("POST", true, meme))
+      .then(handleHttpErrors);
+  }
+
+  const downvoteMeme = (username, meme) => {
+    return fetch(URL + `/api/memes/downvote/${username}`,
+      apiFacade.makeOptions("POST", true, meme))
+      .then(handleHttpErrors);
+  }
+
+  const getMemeById = (id) => {
+    return fetch(URL + `/api/memes/${id}`,
+      apiFacade.makeOptions("GET", true))
+      .then(handleHttpErrors)
+  }
+
+  return {
+    getMeme,
+    getCat,
+    getYon,
+    getDogs,
+    upvoteMeme,
+    downvoteMeme,
+    getColdList,
+    getHotList,
+    getComments,
+    addComment,
+    getMemeById
+  };
 };
+
 
 const facade = memeFacade();
 export default facade;

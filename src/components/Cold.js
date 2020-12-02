@@ -28,7 +28,7 @@ export default function Cold() {
 
     return (
         <GridWrapper>
-            {coldList.map(coldListItem => <Content meme={coldListItem} key={coldListItem.imageUrl} loadMore={loadMore} />)}
+            {coldList.map(coldListItem => <Content hasVotes={true} meme={coldListItem} key={coldListItem.imageUrl} loadMore={loadMore} />)}
             <Button onClick={loadMore} className="btn btn-secondary">Load more</Button>
         </GridWrapper>
 
