@@ -23,7 +23,7 @@ export default function Admin() {
   const deleteUser = (e) => {
     adminFacade
       .deleteUser(e.target.value)
-      .then((res) => setMsg(res.userName + " has been deleted"));
+      .then((res) => setMsg(res.username + " has been deleted"));
   };
 
   const banUser = (e) => {

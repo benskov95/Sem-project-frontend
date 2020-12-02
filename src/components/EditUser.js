@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import userFacade from "../facades/userFacade";
 
 
-export default function EditUser({username, profilePicture}) {
+export default function EditUser({username, profilePicture, roles}) {
     const [changePic, setChangePic] = useState(false);
     const [changePw, setChangePw] = useState(false);
     const [doReturn, setDoReturn] = useState(false);
@@ -126,7 +126,7 @@ export default function EditUser({username, profilePicture}) {
                 </div>
             ) : ""}
 
-            {username === "admin" ? (
+            {roles.includes("admin") ? (
                 <Link to="/admin"><button>Manage users</button></Link>
             ) : ""}
         </div>

@@ -176,7 +176,7 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
           <Modal.Title>My account</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <EditUser username={user} profilePicture={profilePicture} />
+          <EditUser username={user} profilePicture={profilePicture} roles={roles}/>
         </Modal.Body>
         <Modal.Footer><button onClick={logout}>Log out</button></Modal.Footer>
       </Modal>
