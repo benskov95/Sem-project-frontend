@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import userFacade from "../facades/userFacade";
 
 
-export default function EditUser({ username, profilePicture, roles }) {
+export default function EditUser({ username, profilePicture, setProfilePicture, roles }) {
     const [changePic, setChangePic] = useState(false);
     const [changePw, setChangePw] = useState(false);
     const [doReturn, setDoReturn] = useState(false);
@@ -34,6 +34,7 @@ export default function EditUser({ username, profilePicture, roles }) {
             .then(res => {
                 setMsg("Profile picture has been changed.")
                 localStorage.setItem("profilePicture", newProfilePic.profilePic);
+                setProfilePicture(newProfilePic.profilePic)
             });
 
     }

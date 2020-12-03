@@ -22,7 +22,6 @@ import Dog from '../components/Dog';
 import EditUser from "../components/EditUser"
 import Hot from "../components/Hot";
 import Cold from "../components/Cold";
-
 import Favorite from "../components/Favorite";
 import Comment from "../components/Comment"
 
@@ -60,7 +59,7 @@ const Styles = styled.div`
 export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
   let user = isLoggedIn ? localStorage.getItem("user") : "";
   let roles = isLoggedIn ? localStorage.getItem("roles") : "";
-  let profilePicture = isLoggedIn ? localStorage.getItem("profilePicture") : "";
+  const [profilePicture, setProfilePicture] = useState(localStorage.getItem("profilePicture"));
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
@@ -177,7 +176,7 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
           <Modal.Title style={{ marginTop: 10 }}>{user}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <EditUser username={user} profilePicture={profilePicture} roles={roles} />
+          <EditUser username={user} profilePicture={profilePicture} setProfilePicture={setProfilePicture} roles={roles} />
         </Modal.Body>
         <Modal.Footer><button className="btn btn-secondary" onClick={logout}>Log out</button></Modal.Footer>
       </Modal>
