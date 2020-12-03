@@ -8,7 +8,7 @@ import "react-bootstrap/dist/react-bootstrap.min"
 import styled from 'styled-components';
 
 
-export default function Comments() {
+export default function Comments({isLoggedIn}) {
 
   
   const GridWrapper = styled.div`
@@ -57,10 +57,14 @@ export default function Comments() {
        <img className="meme-img" src={meme.imageUrl} alt="" />    
           
          <div className="commentForm">
+           {isLoggedIn ? (
          <Form reply onSubmit={handleSubmit}>
             <Form.TextArea onChange={handleChange} name={"comment"} value={newComment.comment} />
             <Button style={{backgroundColor : "#5a6268"}} content='Add Comment' labelPosition='left' icon='edit' primary />
           </Form>  
+
+           ): <p style={{color : "red"}}>You must be logged in to comment</p>}
+           
           </div>    
           
           {comments.map(comment => 
