@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import memeFacade from "../facades/memeFacade"
-import { Button, Comment, Form, Header, Container } from 'semantic-ui-react'
+import { Button, Comment, Form, Container } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 import { useParams } from "react-router-dom"
 import "../styles/Meme.css";

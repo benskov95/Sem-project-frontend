@@ -20,7 +20,7 @@ function apiFacade() {
     let userFromToken = JSON.parse(atob(data.token.split(".")[1]));
     localStorage.setItem("user", userFromToken.sub);
     localStorage.setItem("roles", userFromToken.roles);
-    localStorage.setItem("profilePicture", userFromToken.profilePicture);
+    localStorage.setItem("profilePicture", data.profilePicture);
     localStorage.setItem("upvotedMemes", JSON.stringify(data.upvotedMemes));
     localStorage.setItem("downvotedMemes", JSON.stringify(data.downvotedMemes));
   };
