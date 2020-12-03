@@ -1,11 +1,22 @@
 import { useEffect, useState } from "react"
 import memeFacade from "../facades/memeFacade"
-import { Button, Comment, Form, Container } from 'semantic-ui-react'
+import { Button, Form, Container } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 import { useParams } from "react-router-dom"
 import "../styles/Meme.css";
+import "react-bootstrap/dist/react-bootstrap.min"
+import styled from 'styled-components';
 
-export default function Comments() {
+
+export default function Comments({isLoggedIn}) {
+
+  
+  const GridWrapper = styled.div`
+  grid-gap: 10px;
+  margin-top: 80px;
+  margin-left: 6em;
+  margin-right: 6em;
+  `; 
 
 
   let username = localStorage.getItem("user")
@@ -41,36 +52,40 @@ export default function Comments() {
 
 
   return (
-    <Container style={{ margin: 100 }}>
-      <div className="comment">
-        <img className="meme-img" src={meme.imageUrl} alt="" />
-        <Comment.Group size="large">
-          {comments.map(comment =>
-            <div className="container" style={{ border: "1px solid black" }} key={comment.dateOfPost}>
-              <Comment style={{}}>
-                <Comment.Avatar as='a' src={comment.profilePicture} />
-                <Comment.Content>
-                  <Comment.Author style={{ float: 'left' }}>{comment.username}</Comment.Author>
-                  <Comment.Metadata>
-                    <div>{comment.dateOfPost}</div>
-                  </Comment.Metadata>
-                  <Comment.Text className="commentText">
-                    {comment.comment}
-                  </Comment.Text>
-                </Comment.Content>
-              </Comment>
-              <br></br>
-            </div>
-
-
-          )}
-          <Form reply onSubmit={handleSubmit}>
+    <GridWrapper>
+      <Container className="content">
+       <img className="meme-img" src={meme.imageUrl} alt="" />    
+          
+         <div className="commentForm">
+           {isLoggedIn ? (
+         <Form reply onSubmit={handleSubmit}>
             <Form.TextArea onChange={handleChange} name={"comment"} value={newComment.comment} />
-            <Button content='Add Comment' labelPosition='left' icon='edit' primary />
-          </Form>
-        </Comment.Group>
-      </div>
-    </Container >
+            <Button style={{backgroundColor : "#5a6268"}} content='Add Comment' labelPosition='left' icon='edit' primary />
+          </Form>  
+
+           ): <p style={{color : "red"}}>You must be logged in to comment</p>}
+           
+          </div>    
+          
+          {comments.map(comment => 
+           <div className="commentContent"> 
+              <div className="commentHeader">
+              <h3 >{comment.username}</h3></div>
+              <div className="commentTime">{comment.dateOfPost}</div> 
+              <div className="profilpicture">
+              <img className="profileImg" src={comment.profilePicture} alt=""/>
+              </div>
+          <div className="commentText"><span>{comment.comment}</span></div>
+                                    
+         </div>
+       )} 
+      
+       
+         
+         
+
+      </Container>
+      </GridWrapper>
   )
 
 

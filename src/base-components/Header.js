@@ -166,7 +166,10 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
 
         <Route path="/hot" component={Hot} />
         <Route path="/cold" component={Cold} />
-        <Route path={`/comment/:meme_id`} component={Comment} />
+        <Route path={`/comment/:meme_id`} >
+        <Comment isLoggedIn={isLoggedIn}/>
+        </Route> 
+       
         <Route component={NoMatch} />
 
 
@@ -174,7 +177,7 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
 
       <Modal show={showEdit} onHide={handleShowEdit}>
         <Modal.Header closeButton>
-          <img src={profilePicture} className="img-fluid" style={{ maxWidth: 55, marginRight: 5 }}></img>
+          <img src={profilePicture} className="img-fluid" style={{ maxWidth: 55, marginRight: 5 }} alt=""></img>
           <Modal.Title style={{ marginTop: 10 }}>{user}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
