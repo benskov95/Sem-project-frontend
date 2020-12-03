@@ -39,13 +39,13 @@ export default function Register({ handleShowRegister, showRegister }) {
 
   return (
     <Modal show={showRegister} onHide={handleShowRegister}>
-      {success && (
-        <Confetti width={498} height={367} opacity={0.7} numberOfPieces={150} />)}
+      {success && msg && (
+        <Confetti width={498} height={290.5} opacity={0.7} numberOfPieces={125} />)}
       <Modal.Header closeButton>
-        <Modal.Title>Sign Up</Modal.Title>
+        <Modal.Title style={{ marginLeft: "42.3%" }}>Sign Up</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <form onSubmit={registerUser}>
+        <form onSubmit={registerUser} style={{ textAlign: "center" }}>
           <label>Username</label>
           <br />
           <input
