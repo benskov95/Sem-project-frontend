@@ -62,7 +62,7 @@ export default function Admin() {
                   <td>{roles}</td>
                   <td style={{ float: 'right' }}>
                     <button
-                      className="btn btn-dark"
+                      className="btn btn-secondary"
                       onClick={banUser}
                       value={user.username}
                       style={{ marginRight: 1 }}
