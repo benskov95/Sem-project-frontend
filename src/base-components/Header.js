@@ -173,7 +173,8 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
 
       <Modal show={showEdit} onHide={handleShowEdit}>
         <Modal.Header closeButton>
-          <Modal.Title>My account</Modal.Title>
+          <img src={profilePicture} className="img-fluid" style={{ maxWidth: 55, marginRight: 5 }}></img>
+          <Modal.Title style={{ marginTop: 10 }}>{user}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <EditUser username={user} profilePicture={profilePicture} roles={roles} />
