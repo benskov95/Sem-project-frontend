@@ -5,18 +5,9 @@ import 'semantic-ui-css/semantic.min.css'
 import { useParams } from "react-router-dom"
 import "../styles/Meme.css";
 import "react-bootstrap/dist/react-bootstrap.min"
-import styled from 'styled-components';
 
 
 export default function Comments({isLoggedIn}) {
-
-  
-  const GridWrapper = styled.div`
-  grid-gap: 10px;
-  margin-top: 80px;
-  margin-left: 6em;
-  margin-right: 6em;
-  `; 
 
 
   let username = localStorage.getItem("user")
@@ -52,8 +43,8 @@ export default function Comments({isLoggedIn}) {
 
 
   return (
-    <GridWrapper>
-      <Container className="content">
+
+      <Container className="content" style={{marginTop: "80px"}}>
        <img className="meme-img" src={meme.imageUrl} alt="" />    
           
          <div className="commentForm">
@@ -80,12 +71,9 @@ export default function Comments({isLoggedIn}) {
          </div>
        )} 
       
-       
-         
-         
 
       </Container>
-      </GridWrapper>
+
   )
 
 

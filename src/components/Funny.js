@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { LOCAL_URL } from "../utils/settings";
+import { API_URL } from "../utils/settings";
 import "../styles/Meme.css";
 import styled from 'styled-components';
 import memeFacade from "../facades/memeFacade"
@@ -14,7 +14,7 @@ const GridWrapper = styled.div`
   margin-right: 6em;
 `; 
 
-export let URL = LOCAL_URL;
+export let URL = API_URL;
 
 export default function Funny({isLoggedIn}) {
   const [funnys, setFunnys] = useState([])

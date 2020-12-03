@@ -137,7 +137,7 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
 
       <Switch>
         {/* for deployment */}
-        <Route path="/ca3-startcode">
+        <Route path="/borngag">
           <Redirect to="/" />
         </Route>
         <PrivateRoute path="/admin" isLoggedIn={isLoggedIn} component={Admin} />
