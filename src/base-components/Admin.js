@@ -41,16 +41,15 @@ export default function Admin() {
     <div>
       <h1>Hello Admin</h1>
       <br />
-      <p>{msg !== "" ? `${msg}` : ""} </p>
-      <br />
       <h3>List of registered users</h3>
-      <p> (currently logged-in user is excluded)</p>
-      <div className="container">
-        <table className="table table-striped">
+      <p> (Currently logged-in user is excluded)</p>
+      <p style={{ color: 'red' }}>{msg !== "" ? `${msg}` : ""} </p>
+      <div className="containerTable">
+        <table className="table table-striped" style={{ border: '2px solid lightgrey' }}>
           <thead>
             <tr>
               <th>User</th>
-              <th>Roles</th>
+              <th>Role(s)</th>
               <th></th>
             </tr>
           </thead>
@@ -61,18 +60,12 @@ export default function Admin() {
                 <tr key={user.username}>
                   <td>{user.username}</td>
                   <td>{roles}</td>
-                  <td>
+                  <td style={{ float: 'right' }}>
                     <button
                       className="btn btn-secondary"
-                      onClick={deleteUser}
-                      value={user.username}
-                    >
-                      Delete
-                    </button>
-                    <button
-                      className="btn btn-danger"
                       onClick={banUser}
                       value={user.username}
+                      style={{ marginRight: 1 }}
                     >
                       Ban
                     </button>
@@ -80,8 +73,16 @@ export default function Admin() {
                       className="btn btn-secondary"
                       onClick={unbanUser}
                       value={user.username}
+                      style={{ marginRight: 1 }}
                     >
-                      unban
+                      Unban
+                    </button>
+                    <button
+                      className="btn btn-danger"
+                      onClick={deleteUser}
+                      value={user.username}
+                    >
+                      Delete
                     </button>
                   </td>
                 </tr>

@@ -10,12 +10,17 @@ export default function Content({ meme, hasVotes, isLoggedIn }) {
     const [msg, setMsg] = useState("");
     const [voteType, setVoteType] = useState("none");
     const [votes, setVotes] = useState(meme);
+    const [commentCounter, setCommentCounter] = useState(0);
     let upvotedMemes = JSON.parse(localStorage.getItem("upvotedMemes"));
     let downvotedMemes = JSON.parse(localStorage.getItem("downvotedMemes"));
     let username = localStorage.getItem("user");
     
     useEffect(() => {
       checkUpvotedMemes();
+      if (hasVotes) {
+      memeFacade.getComments(meme.meme_id)
+      .then(comments => setCommentCounter(comments.length))
+      }
     }, []);
 
 
@@ -109,14 +114,19 @@ export default function Content({ meme, hasVotes, isLoggedIn }) {
                 <br />
                 
             {hasVotes && (
+            <div>
+            <p className="counter" 
+            style={{float: "right", marginLeft: "8px", marginTop: "10px"}}>
+              {commentCounter}
+            </p>
             <Link to={`/comment/${meme.meme_id}`}> 
-
             <FontAwesomeIcon
              size="2x"
              icon={faCommentDots} 
-             style={{color: "black", float: "right"}}
+             style={{color: "black", float: "right", marginTop: "10px"}}
               />
             </Link>
+            </div>
             )}
           <br />
           

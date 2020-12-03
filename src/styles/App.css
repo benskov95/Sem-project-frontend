@@ -2,6 +2,13 @@
   text-align: center;
 }
 
+.containerTable {
+  align-content: center;
+  text-align: center;
+  margin: auto;
+  width: 50%;
+}
+
 .tableCenter {
   margin-left: auto;
   margin-right: auto;

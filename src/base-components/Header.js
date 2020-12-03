@@ -22,7 +22,6 @@ import Dog from '../components/Dog';
 import EditUser from "../components/EditUser"
 import Hot from "../components/Hot";
 import Cold from "../components/Cold";
-
 import Favorite from "../components/Favorite";
 import Comment from "../components/Comment"
 
@@ -60,7 +59,7 @@ const Styles = styled.div`
 export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
   let user = isLoggedIn ? localStorage.getItem("user") : "";
   let roles = isLoggedIn ? localStorage.getItem("roles") : "";
-  let profilePicture = isLoggedIn ? localStorage.getItem("profilePicture") : "";
+  const [profilePicture, setProfilePicture] = useState(localStorage.getItem("profilePicture"));
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
@@ -173,12 +172,13 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
 
       <Modal show={showEdit} onHide={handleShowEdit}>
         <Modal.Header closeButton>
-          <Modal.Title>My account</Modal.Title>
+          <img src={profilePicture} className="img-fluid" style={{ maxWidth: 55, marginRight: 5 }}></img>
+          <Modal.Title style={{ marginTop: 10 }}>{user}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <EditUser username={user} profilePicture={profilePicture} roles={roles}/>
+          <EditUser username={user} profilePicture={profilePicture} setProfilePicture={setProfilePicture} roles={roles} />
         </Modal.Body>
-        <Modal.Footer><button onClick={logout}>Log out</button></Modal.Footer>
+        <Modal.Footer><button className="btn btn-secondary" onClick={logout}>Log out</button></Modal.Footer>
       </Modal>
 
     </ThemeProvider>

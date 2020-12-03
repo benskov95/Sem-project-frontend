@@ -34,10 +34,10 @@ export const Login = ({ isLoggedIn, setLoginStatus, handleShowLogin, showLogin }
   return (
     <Modal show={showLogin} onHide={handleShowLogin}>
       <Modal.Header closeButton>
-        <Modal.Title>Login</Modal.Title>
+        <Modal.Title style={{ marginLeft: "44.5%" }}>Login</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} style={{ textAlign: "center" }}>
           <label>Username</label>
           <br />
           <input
