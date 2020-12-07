@@ -45,22 +45,28 @@ class SideNav extends React.Component {
                     key: 4
                 },
                 {
+                    path: '/submissions',
+                    name: 'User Submissions',
+                    css: 'fas fa-user',
+                    key: 5
+                },
+                {
                     path: '/hot',
                     name: 'Hot',
                     css: 'fas fa-fire',
-                    key: 5
+                    key: 6
                 },
                 {
                     path: '/cold',
                     name: 'Cold',
                     css: 'fas fa-snowflake',
-                    key: 6
+                    key: 7
                 },
                 {
                     path: '/favorite',
                     name: 'Favorite',
                     css: 'fas fa-thumbs-up',
-                    key: 7
+                    key: 8
                 }
 
             ]

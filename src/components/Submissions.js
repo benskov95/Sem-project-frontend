@@ -8,20 +8,19 @@ const GridWrapper = styled.div`
   margin-top: 80px;
   margin-left: 6em;
   margin-right: 6em;
-`;
+`; 
 
-
-export default function Hot() {
-    const [hotList, setHotList] = useState([]);
+export default function Submissions() {
+    const [userMemes, setUserMemes] = useState([]);
 
     useEffect(() => {
-        memeFacade.getHotList().then(res => setHotList(res))
+        memeFacade.getUserMemes()
+        .then(memes => setUserMemes([...memes]));
     }, [])
 
     return (
         <GridWrapper>
-            {hotList.map(hotListItem => <Content hasVotes={true} meme={hotListItem} key={hotListItem.imageUrl} />)}
+            {userMemes.map(meme => <Content hasVotes={true} meme={meme} key={meme.imageUrl} isUserSubmission={true} />)}
         </GridWrapper>
-
     )
 }

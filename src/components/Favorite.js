@@ -22,21 +22,13 @@ export default function Favorite({ isLoggedIn, user }) {
 
     }, [])
 
-    const loadMore = (e) => {
-        e.preventDefault()
-        if (isLoggedIn) {
-            memeFacade.getFavoriteList(user)
-            .then(res => setFavoriteList([...favoriteList, ...res]))
-         }
-    }
-
 
     return (
         <div>
         {isLoggedIn ? (
             <div>
             <GridWrapper>
-                {favoriteList.map(favoriteListItem => <Content meme={favoriteListItem} key={favoriteListItem.imageUrl} loadMore={loadMore} hasVotes={true} />)}
+                {favoriteList.map(favoriteListItem => <Content meme={favoriteListItem} key={favoriteListItem.imageUrl} hasVotes={true} />)}
             </GridWrapper>
             </div>
         ) : <GridWrapper>

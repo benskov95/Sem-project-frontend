@@ -64,7 +64,18 @@ const memeFacade = () => {
   const getMemeById = (id) => {
     return fetch(URL + `/api/memes/${id}`,
       apiFacade.makeOptions("GET", true))
-      .then(handleHttpErrors)
+      .then(handleHttpErrors);
+  }
+
+  const addUserMeme = (meme) => {
+    return fetch(URL + `/api/memes/post`, 
+    apiFacade.makeOptions("POST", true, meme))
+    .then(handleHttpErrors);
+  }
+
+  const getUserMemes = () => {
+    return fetch(URL + `/api/memes/submissions`)
+    .then(handleHttpErrors);
   }
 
   const reportMeme = (report) =>{
@@ -85,7 +96,9 @@ const memeFacade = () => {
     addComment,
     getMemeById,
     getFavoriteList,
-    reportMeme
+    reportMeme,
+    addUserMeme,
+    getUserMemes
   };
 };
 

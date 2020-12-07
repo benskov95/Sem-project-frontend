@@ -7,7 +7,8 @@ import memeFacade from "../facades/memeFacade";
 import Report from "./Report"
 
 
-export default function Content({ meme, hasVotes, isLoggedIn }) {
+
+export default function Content({ meme, hasVotes, isLoggedIn,isUserSubmission }) {
   const [msg, setMsg] = useState("");
   const [voteType, setVoteType] = useState("none");
   const [votes, setVotes] = useState(meme);
@@ -87,42 +88,47 @@ export default function Content({ meme, hasVotes, isLoggedIn }) {
     }
   }
 
-  return (
-    <div className="content">
 
-      <img className="meme-img" src={meme.imageUrl} alt="" />
-      <FontAwesomeIcon
-        id="up"
-        onClick={vote}
-        className="voteBtn"
-        icon={faFire}
-        style={voteType === "up" ? { color: "red" } : { color: "black" }}
-        size="2x" />
-      {hasVotes ? (
-        <p className="counter">{votes.upvotes}</p>
-      ) : ""}
-      <FontAwesomeIcon
-        id="down"
-        onClick={vote}
-        className="voteBtn"
-        icon={faSnowflake}
-        style={voteType === "down" ? { color: "lightblue" } : { color: "black" }}
-        size="2x" />
-      {hasVotes ? (
-        <p className="counter">{votes.downvotes}</p>
-      ) : ""}
-      <p className="voteText" style={!isLoggedIn ? { color: "red" } : { color: "black" }}>
-        {msg}
-      </p>
-      <br />
+     return (
+        <div className="content">
+          
+          {isUserSubmission ? (
+            <h3 style={{float: "left", marginTop: "5px"}}>{`Posted by: ${meme.postedBy}`}</h3>
+          ) : ""}
+          <img className="meme-img" src={meme.imageUrl} alt="" />
+          <FontAwesomeIcon
+            id="up"
+            onClick={vote}
+            className="voteBtn"
+            icon={faFire}
+            style={voteType === "up" ? { color: "red" } : { color: "black" }}
+            size="2x" />
+            {hasVotes ? (
+              <p className="counter">{votes.upvotes}</p>
+            ) : ""}
+          <FontAwesomeIcon
+            id="down"
+            onClick={vote}
+            className="voteBtn"
+            icon={faSnowflake}
+            style={voteType === "down" ? { color: "lightblue" } : { color: "black" }}
+            size="2x" />         
+            {hasVotes ? (
+                    <p className="counter">{votes.downvotes}</p>
+                  ) : ""}
+                <p className="voteText" style={!isLoggedIn ? {color: "red"} : {color: "black"}}>
+                  {msg}
+                </p>
+                <br />
+                
+            {hasVotes && (
+            <div>
+            <p className="counter" 
+            style={{float: "right", marginLeft: "8px", marginTop: "10px"}}>
+              {commentCounter}
+            </p>
+            <Link to={`/comment/${meme.meme_id}`}> 
 
-      {hasVotes && (
-        <div>
-          <p className="counter"
-            style={{ float: "right", marginLeft: "8px", marginTop: "10px" }}>
-            {commentCounter}
-          </p>
-          <Link to={`/comment/${meme.meme_id}`}>
             <FontAwesomeIcon
               size="2x"
               icon={faCommentDots}
