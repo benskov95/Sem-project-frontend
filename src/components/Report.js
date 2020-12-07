@@ -1,6 +1,7 @@
 import { Form, Modal } from "react-bootstrap";
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import memefacade from "../facades/memeFacade"
 
 export default function Report ({showReport, handleShowReport, meme_id}){
     
@@ -12,8 +13,9 @@ export default function Report ({showReport, handleShowReport, meme_id}){
     }
 
     const submitReport = (e) =>{
-        e.prevent.default()
-        
+        e.preventDefault()
+        memefacade.reportMeme(report).then(handleShowReport)
+
     }
 
     return (

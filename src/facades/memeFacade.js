@@ -67,6 +67,11 @@ const memeFacade = () => {
       .then(handleHttpErrors)
   }
 
+  const reportMeme = (report) =>{
+    return fetch(URL + "/api/memes/report/", apiFacade.makeOptions("POST", true, report))
+    .then(handleHttpErrors)
+  }
+
   return {
     getMeme,
     getCat,
@@ -79,7 +84,8 @@ const memeFacade = () => {
     getComments,
     addComment,
     getMemeById,
-    getFavoriteList
+    getFavoriteList,
+    reportMeme
   };
 };
 
