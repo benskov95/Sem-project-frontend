@@ -59,7 +59,8 @@ const Styles = styled.div`
 export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
   let user = isLoggedIn ? localStorage.getItem("user") : "";
   let roles = isLoggedIn ? localStorage.getItem("roles") : "";
-  const [profilePicture, setProfilePicture] = useState(localStorage.getItem("profilePicture"));
+  let pic = localStorage.getItem("profilePicture");
+  const [profilePicture, setProfilePicture] = useState(pic);
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
@@ -89,6 +90,11 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
         <Styles>
           <Navbar expand="lg">
             <Navbar.Brand as={NavLink} to="/"><img src={BornGag} className="img-fluid" alt="logo" /></Navbar.Brand>
+            {isLoggedIn ? (
+            <NavLink to="/post" style={{position: "fixed", left: 160}}>
+                Post meme
+            </NavLink>
+            ) : ""}
             <Nav className="auto">
               {!isLoggedIn ? (
                 <React.Fragment>
@@ -169,6 +175,7 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
         <Route path={`/comment/:meme_id`} >
         <Comment isLoggedIn={isLoggedIn}/>
         </Route> 
+        <Route path="/post" component={Cat} />
        
         <Route component={NoMatch} />
 
