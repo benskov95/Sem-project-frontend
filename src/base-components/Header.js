@@ -24,9 +24,7 @@ import Hot from "../components/Hot";
 import Cold from "../components/Cold";
 import Favorite from "../components/Favorite";
 import Comment from "../components/Comment"
-
-
-
+import PostMeme from '../components/PostMeme';
 
 const Styles = styled.div`
  
@@ -175,7 +173,7 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
         <Route path={`/comment/:meme_id`} >
         <Comment isLoggedIn={isLoggedIn}/>
         </Route> 
-        <Route path="/post" component={Cat} />
+        <Route path="/post" component={PostMeme} />
        
         <Route component={NoMatch} />
 
