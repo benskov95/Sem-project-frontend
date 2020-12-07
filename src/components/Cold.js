@@ -2,7 +2,7 @@ import Content from "./Content";
 import React, { useState, useEffect } from "react";
 import styled from 'styled-components';
 import memeFacade from "../facades/memeFacade"
-import { Button } from "react-bootstrap"
+
 const GridWrapper = styled.div`
   grid-gap: 10px;
   margin-top: 80px;
@@ -12,8 +12,8 @@ const GridWrapper = styled.div`
 
 
 export default function Cold() {
-
     const [coldList, setColdList] = useState([]);
+    
     useEffect(() => {
         memeFacade.getColdList().then(res => setColdList(res))
 
@@ -29,7 +29,6 @@ export default function Cold() {
     return (
         <GridWrapper>
             {coldList.map(coldListItem => <Content hasVotes={true} meme={coldListItem} key={coldListItem.imageUrl} loadMore={loadMore} />)}
-            <Button onClick={loadMore} className="btn btn-secondary">Load more</Button>
         </GridWrapper>
 
     )

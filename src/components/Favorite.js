@@ -2,8 +2,8 @@ import Content from "./Content";
 import React, { useState, useEffect } from "react";
 import styled from 'styled-components';
 import memeFacade from "../facades/memeFacade"
-import { Button } from "react-bootstrap"
 import "../styles/Meme.css"
+
 const GridWrapper = styled.div`
   grid-gap: 10px;
   margin-top: 80px;
@@ -37,7 +37,6 @@ export default function Favorite({ isLoggedIn, user }) {
             <div>
             <GridWrapper>
                 {favoriteList.map(favoriteListItem => <Content meme={favoriteListItem} key={favoriteListItem.imageUrl} loadMore={loadMore} hasVotes={true} />)}
-                <Button onClick={loadMore} className="btn btn-secondary">Load more</Button>
             </GridWrapper>
             </div>
         ) : <GridWrapper>
