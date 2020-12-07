@@ -4,6 +4,7 @@ import { faCommentDots, faFire, faSnowflake, faFlag } from "@fortawesome/free-so
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import memeFacade from "../facades/memeFacade";
+import Report from "./Report"
 
 
 export default function Content({ meme, hasVotes, isLoggedIn }) {
@@ -134,6 +135,7 @@ export default function Content({ meme, hasVotes, isLoggedIn }) {
             icon={faFlag}
             style={{ color: "black", float: "right", marginTop: "10px", marginRight: "10px" }}
           />
+          <Report handleShowReport={handleShowReport} showReport={showReport} meme_id={meme.meme_id}/>
         </div>
       )}
       <br />
