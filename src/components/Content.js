@@ -6,7 +6,7 @@ import {Link} from "react-router-dom";
 import memeFacade from "../facades/memeFacade";
 
 
-export default function Content({ meme, hasVotes, isLoggedIn }) {
+export default function Content({ meme, hasVotes, isLoggedIn, isUserSubmission }) {
     const [msg, setMsg] = useState("");
     const [voteType, setVoteType] = useState("none");
     const [votes, setVotes] = useState(meme);
@@ -87,6 +87,9 @@ export default function Content({ meme, hasVotes, isLoggedIn }) {
      return (
         <div className="content">
           
+          {isUserSubmission ? (
+            <h3 style={{float: "left", marginTop: "5px"}}>{`Posted by: ${meme.postedBy}`}</h3>
+          ) : ""}
           <img className="meme-img" src={meme.imageUrl} alt="" />
           <FontAwesomeIcon
             id="up"

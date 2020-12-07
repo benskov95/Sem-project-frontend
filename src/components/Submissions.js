@@ -20,7 +20,7 @@ export default function Submissions() {
 
     return (
         <GridWrapper>
-            {userMemes.map(meme => <Content hasVotes={true} meme={meme} key={meme.imageUrl} />)}
+            {userMemes.map(meme => <Content hasVotes={true} meme={meme} key={meme.imageUrl} isUserSubmission={true} />)}
         </GridWrapper>
     )
 }
