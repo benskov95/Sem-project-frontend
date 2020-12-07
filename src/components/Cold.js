@@ -19,16 +19,10 @@ export default function Cold() {
 
     }, [])
 
-    const loadMore = (e) => {
-        e.preventDefault()
-        memeFacade.getColdList().then(res => setColdList([...coldList, ...res])
-        )
-    }
-
 
     return (
         <GridWrapper>
-            {coldList.map(coldListItem => <Content hasVotes={true} meme={coldListItem} key={coldListItem.imageUrl} loadMore={loadMore} />)}
+            {coldList.map(coldListItem => <Content hasVotes={true} meme={coldListItem} key={coldListItem.imageUrl} />)}
         </GridWrapper>
 
     )

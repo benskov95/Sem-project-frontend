@@ -25,6 +25,7 @@ import Cold from "../components/Cold";
 import Favorite from "../components/Favorite";
 import Comment from "../components/Comment"
 import PostMeme from '../components/PostMeme';
+import Submissions from "../components/Submissions"
 
 const Styles = styled.div`
  
@@ -57,8 +58,7 @@ const Styles = styled.div`
 export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
   let user = isLoggedIn ? localStorage.getItem("user") : "";
   let roles = isLoggedIn ? localStorage.getItem("roles") : "";
-  let pic = localStorage.getItem("profilePicture");
-  const [profilePicture, setProfilePicture] = useState(pic);
+  const [profilePicture, setProfilePicture] = useState(localStorage.getItem("profilePicture"));
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
@@ -174,6 +174,7 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
         <Comment isLoggedIn={isLoggedIn}/>
         </Route> 
         <Route path="/post" component={PostMeme} />
+        <Route path="/submissions" component={Submissions} />
        
         <Route component={NoMatch} />
 
