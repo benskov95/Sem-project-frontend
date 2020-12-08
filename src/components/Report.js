@@ -20,7 +20,7 @@ export default function Report ({showReport, handleShowReport, meme_id}){
         e.preventDefault()
         if(report.description.length < 1){
             setErrorMsg("Choose a category")
-        }else{
+        } else {
 
         memefacade.reportMeme(report).then(res => {
         setMsg("Your report has been submitted - Thanks!") 
@@ -59,9 +59,8 @@ export default function Report ({showReport, handleShowReport, meme_id}){
             <p style={{color : "red"}}>{errorMsg}</p>
         </Modal.Body>
       </Modal>)
-
-
 }
+
 const printError = (promise, setError) => {
     promise.fullError.then(function (status) {
       setError(`${status.message}`);

@@ -7,12 +7,16 @@ export default function ReportedMemes() {
     const [reports, setReports] = useState([]);
     const [msg, setMsg] = useState("");
     const [show, setShow] = useState(false);
+    const [selected, setSelected] = useState("");
 
     useEffect(() => {
         adminFacade.getReportedMemes().then((memes) => setReports(memes));
     }, [msg]);
 
-    const handleShow = () => {
+    const handleShow = (e) => {
+        if (typeof e !== "undefined") {
+            setSelected(e.target.id);
+        }
         setShow(!show)
     }
 
@@ -37,25 +41,32 @@ export default function ReportedMemes() {
                         </tr>
                     </thead>
                     <tbody>
-                        {reports.map((meme) => {
-                            console.log(meme.reports)
+                        {reports.map(meme => {
                             let description = meme.reports.map(report => report.description)
                             let filter = description.filter(onlyUnique).join(", ")
                             return (
-                                <React.Fragment>
+                                <React.Fragment key={meme.meme_id}>
                                     <tr key={meme.meme_id}>
-                                        <td><img src={meme.imageUrl} style={{ maxWidth: 55 }} onClick={handleShow}></img></td>
+                                        <td>
+                                            <img 
+                                            id={meme.imageUrl} 
+                                            src={meme.imageUrl} 
+                                            style={{ maxWidth: 55 }} 
+                                            onClick={handleShow}
+                                            alt=""
+                                            >
+                                            </img>
+                                        </td>
                                         <td>{filter}</td>
                                         <td>{meme.reports.length}</td>
-                                        <ImageModal imageUrl={meme.imageUrl} show={show} handleShow={handleShow} />
                                     </tr>
-
                                 </React.Fragment>
                             );
                         })}
                     </tbody>
                 </table>
             </div>
+            <ImageModal imageUrl={selected} show={show} handleShow={handleShow} />
         </div>
     );
 }
@@ -66,7 +77,7 @@ const ImageModal = ({ imageUrl, show, handleShow }) => {
             <Modal.Header closeButton>
             </Modal.Header>
             <Modal.Body>
-                <img src={imageUrl} className="img-fluid"></img>
+                <img alt="" src={imageUrl} className="img-fluid"></img>
             </Modal.Body>
         </Modal>
     );
