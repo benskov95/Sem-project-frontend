@@ -27,7 +27,8 @@ export default function Submissions({isLoggedIn, blacklistedMemes}) {
             key={meme.imageUrl} 
             isUserSubmission={true} 
             blacklistedMemes={blacklistedMemes}
-            isLoggedIn/>)}
+            isLoggedIn={isLoggedIn}
+            />)}
         </GridWrapper>
     )
 }

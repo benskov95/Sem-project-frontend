@@ -49,6 +49,7 @@ export default function ReportedMemes() {
                             <th>Meme</th>
                             <th>Flagged as</th>
                             <th>Number of reports</th>
+                            <th>Posted by</th>
                             <th></th>
                             <th></th>
                         </tr>
@@ -72,6 +73,7 @@ export default function ReportedMemes() {
                                         </td>
                                         <td>{filter}</td>
                                         <td>{meme.reports.length}</td>
+                                        <td>{meme.postedBy}</td>
                                         <td>
                                             <button
                                             id={meme.meme_id}

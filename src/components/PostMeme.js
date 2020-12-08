@@ -40,7 +40,7 @@ export default function PostMeme() {
     return (
         <div style={{marginTop: "100px"}}>
             <h1>Post a meme</h1>
-            <p><i>All user submissions are posted anonymously.</i></p>
+            <p><i>Posting offensive content will result in a ban.</i></p>
             <p style={{fontSize: "16px", color: "green"}}>{msg}</p>
             <p style={{fontSize: "16px", color: "red"}}>{error}</p>
             <br />
