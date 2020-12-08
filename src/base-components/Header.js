@@ -2,7 +2,7 @@ import { Nav, Navbar, Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import "../styles/App.css";
 import "../styles/Navbar.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Switch, Route, NavLink, Redirect } from "react-router-dom";
 import { Login } from "./Login";
 import Funny from "../components/Funny";
@@ -59,7 +59,8 @@ const Styles = styled.div`
 export default function Header({ isLoggedIn, setLoginStatus, loginMsg, blacklistedMemes }) {
   let user = isLoggedIn ? localStorage.getItem("user") : "";
   let roles = isLoggedIn ? localStorage.getItem("roles") : "";
-  const [profilePicture, setProfilePicture] = useState(localStorage.getItem("profilePicture"));
+  let pic = localStorage.getItem("profilePicture") !== null ? localStorage.getItem("profilePicture") : "";
+  const [profilePicture, setProfilePicture] = useState(pic);
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
@@ -70,6 +71,10 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg, blacklist
   const themeToggler = () => {
     theme === 'light' ? setTheme('dark') : setTheme('light')
   }
+
+  useEffect(() => {
+    setProfilePicture(localStorage.getItem("profilePicture"))
+  }, [pic])
 
   const logout = () => {
     apiFacade.logout();
