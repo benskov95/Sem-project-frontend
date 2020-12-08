@@ -11,7 +11,7 @@ const GridWrapper = styled.div`
 `;
 
 
-export default function Cold() {
+export default function Cold({isLoggedIn}) {
     const [coldList, setColdList] = useState([]);
     
     useEffect(() => {
@@ -27,7 +27,13 @@ export default function Cold() {
 
     return (
         <GridWrapper>
-            {coldList.map(coldListItem => <Content hasVotes={true} meme={coldListItem} key={coldListItem.imageUrl} />)}
+            {coldList.map(coldListItem => 
+            <Content 
+            hasVotes={true} 
+            meme={coldListItem} 
+            key={coldListItem.imageUrl} 
+            isLoggedIn={isLoggedIn}
+            />)}
         </GridWrapper>
 
     )

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import memefacade from "../facades/memeFacade"
 
-export default function Report ({showReport, handleShowReport, meme_id}){
+export default function Report ({showReport, handleShowReport, meme_id, isLoggedIn}){
     let username = localStorage.getItem("user")
     let initState = {"description" : "", "meme_id" : meme_id, "username" : username}
     const [errorMsg, setErrorMsg] = useState("")
@@ -17,7 +17,8 @@ export default function Report ({showReport, handleShowReport, meme_id}){
     }
 
     const submitReport = (e) =>{
-        e.preventDefault()
+      e.preventDefault()
+      if (isLoggedIn) {
         if(report.description.length < 1){
             setErrorMsg("Choose a category")
         } else {
@@ -27,7 +28,11 @@ export default function Report ({showReport, handleShowReport, meme_id}){
         setReport(initState)    
     })
         .catch(error => printError(error, setErrorMsg))
-    }}
+    }
+  } else {
+    setErrorMsg("You have to be logged in to report memes.")
+  }
+}
 
     return (
         

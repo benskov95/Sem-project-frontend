@@ -11,7 +11,7 @@ const GridWrapper = styled.div`
 `;
 
 
-export default function Hot() {
+export default function Hot({isLoggedIn}) {
     const [hotList, setHotList] = useState([]);
 
     useEffect(() => {
@@ -26,7 +26,13 @@ export default function Hot() {
 
     return (
         <GridWrapper>
-            {hotList.map(hotListItem => <Content hasVotes={true} meme={hotListItem} key={hotListItem.imageUrl} />)}
+            {hotList.map(hotListItem => 
+            <Content 
+            hasVotes={true} 
+            meme={hotListItem} 
+            key={hotListItem.imageUrl} 
+            isLoggedIn={isLoggedIn} 
+            />)}
         </GridWrapper>
 
     )

@@ -160,18 +160,16 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
         <Route path="/dog">
           <Dog isLoggedIn={isLoggedIn} />
         </Route>
-
-        <Route path="/cat" component={Cat} />
-        <Route path="/yesorno" component={YesOrNo} />
-        <Route path="/dog" component={Dog} />
-        <Route path="/hot" component={Hot} />
-        <Route path="/cold" component={Cold} />
+        <Route path="/hot">
+          <Hot isLoggedIn={isLoggedIn} />
+        </Route>
+        <Route path="/cold">
+          <Cold isLoggedIn={isLoggedIn} />
+        </Route>
         <Route path="/favorite">
           <Favorite isLoggedIn={isLoggedIn} user={user} />
         </Route>
 
-        <Route path="/hot" component={Hot} />
-        <Route path="/cold" component={Cold} />
         <Route path={`/comment/:meme_id`} >
           <Comment isLoggedIn={isLoggedIn} />
         </Route>
