@@ -18,10 +18,10 @@ export default function Content({ meme, hasVotes, isLoggedIn, isUserSubmission, 
   let upvotedMemes = JSON.parse(localStorage.getItem("upvotedMemes"));
   let downvotedMemes = JSON.parse(localStorage.getItem("downvotedMemes"));
   let username = localStorage.getItem("user");
-
+  isBlacklisted(meme, blacklistedMemes);
+  
   useEffect(() => {
     checkUpvotedMemes();
-    isBlacklisted(meme);
     if (hasVotes) {
       memeFacade.getComments(meme.meme_id)
         .then(comments => setCommentCounter(comments.length))
@@ -87,14 +87,6 @@ export default function Content({ meme, hasVotes, isLoggedIn, isUserSubmission, 
         return 0;
       });
     }
-  }
-
-  const isBlacklisted = (meme) => {
-    blacklistedMemes.forEach(blacklistedMeme => {
-      if (meme.imageUrl == blacklistedMeme.imageUrl) {
-        meme.imageUrl = "blacklisted";
-      }
-    })
   }
 
 
@@ -173,3 +165,11 @@ const printError = (promise, setError) => {
   });
 };
 
+const isBlacklisted = (meme, blacklistedMemes) => {
+  blacklistedMemes.forEach(blacklistedMeme => {
+    if (meme.imageUrl == blacklistedMeme.imageUrl) {
+      meme.imageUrl = "blacklisted";
+      console.log("hej")
+    }
+  })
+}
