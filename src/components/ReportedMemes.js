@@ -1,6 +1,7 @@
 import adminFacade from "../base-facades/adminFacade";
 import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
+import memeFacade from "../facades/memeFacade";
 
 export default function ReportedMemes() {
 
@@ -24,12 +25,14 @@ export default function ReportedMemes() {
         return self.indexOf(value) === index;
     }
 
-    const blacklistMeme = () => {
-        
+    const blacklistMeme = (e) => {
+        memeFacade.blacklistMeme(e.target.id)
+        .then(res => setMsg("Meme has been successfully blacklisted."))
     }
 
-    const dismissReports = () => {
-        
+    const dismissReports = (e) => {
+        memeFacade.dismissMemeReports(e.target.id)
+        .then(res => setMsg("All reports for this meme have been deleted."))
     }
 
     return (
@@ -37,7 +40,7 @@ export default function ReportedMemes() {
             <h1>Hello Admin</h1>
             <br />
             <h3>List of reported memes</h3>
-            <p style={{ color: 'red' }}>{msg !== "" ? `${msg}` : ""} </p>
+            <p style={{ color: 'green' }}>{msg !== "" ? `${msg}` : ""} </p>
             <br />
             <div className="containerTable">
                 <table className="table table-striped" style={{ border: '2px solid lightgrey' }}>
@@ -71,6 +74,7 @@ export default function ReportedMemes() {
                                         <td>{meme.reports.length}</td>
                                         <td>
                                             <button
+                                            id={meme.meme_id}
                                              onClick={blacklistMeme} 
                                              className="btn btn-dark"
                                              > Blacklist
@@ -78,6 +82,7 @@ export default function ReportedMemes() {
                                         </td>
                                         <td>
                                             <button
+                                            id={meme.meme_id}
                                             onClick={dismissReports}
                                             className="btn btn-secondary"
                                             > Dismiss
@@ -101,7 +106,7 @@ const ImageModal = ({ imageUrl, show, handleShow }) => {
             <Modal.Header closeButton>
             </Modal.Header>
             <Modal.Body>
-                <img alt="" src={imageUrl} className="img-fluid"></img>
+                <img alt="" src={imageUrl} className="img-fluid" style={{minWidth: "450px"}} />
             </Modal.Body>
         </Modal>
     );

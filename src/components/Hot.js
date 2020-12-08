@@ -11,7 +11,7 @@ const GridWrapper = styled.div`
 `;
 
 
-export default function Hot({isLoggedIn}) {
+export default function Hot({isLoggedIn, blacklistedMemes}) {
     const [hotList, setHotList] = useState([]);
 
     useEffect(() => {
@@ -32,6 +32,7 @@ export default function Hot({isLoggedIn}) {
             meme={hotListItem} 
             key={hotListItem.imageUrl} 
             isLoggedIn={isLoggedIn} 
+            blacklistedMemes={blacklistedMemes}
             />)}
         </GridWrapper>
 

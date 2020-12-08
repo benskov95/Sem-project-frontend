@@ -8,7 +8,7 @@ import Report from "./Report"
 
 
 
-export default function Content({ meme, hasVotes, isLoggedIn, isUserSubmission }) {
+export default function Content({ meme, hasVotes, isLoggedIn, isUserSubmission, blacklistedMemes }) {
   const [msg, setMsg] = useState("");
   const [voteType, setVoteType] = useState("none");
   const [votes, setVotes] = useState(meme);
@@ -21,6 +21,7 @@ export default function Content({ meme, hasVotes, isLoggedIn, isUserSubmission }
 
   useEffect(() => {
     checkUpvotedMemes();
+    isBlacklisted(meme);
     if (hasVotes) {
       memeFacade.getComments(meme.meme_id)
         .then(comments => setCommentCounter(comments.length))
@@ -88,10 +89,19 @@ export default function Content({ meme, hasVotes, isLoggedIn, isUserSubmission }
     }
   }
 
+  const isBlacklisted = (meme) => {
+    blacklistedMemes.forEach(blacklistedMeme => {
+      if (meme.imageUrl == blacklistedMeme.imageUrl) {
+        meme.imageUrl = "blacklisted";
+      }
+    })
+  }
+
 
      return (
-        <div className="content">
-          
+       <div className="content">
+         {meme.imageUrl !== "blacklisted" ? (
+          <div>
           {isUserSubmission ? (
             <h3 style={{float: "left", marginTop: "5px"}}>{`Posted by: ${meme.postedBy}`}</h3>
           ) : ""}
@@ -150,7 +160,8 @@ export default function Content({ meme, hasVotes, isLoggedIn, isUserSubmission }
         </div>
       )}
       <br />
-
+      </div>
+         ) : ""}
     </div>
   )
 

@@ -83,6 +83,21 @@ const memeFacade = () => {
     .then(handleHttpErrors)
   }
 
+  const blacklistMeme = (id) => {
+    return fetch(URL + `/api/memes/blacklist/${id}`, apiFacade.makeOptions("PUT", true))
+    .then(handleHttpErrors);
+  }
+
+  const dismissMemeReports = (id) => {
+    return fetch(URL + `/api/memes/dismiss/${id}`, apiFacade.makeOptions("PUT", true))
+    .then(handleHttpErrors);
+  }
+
+  const getBlacklistedMemes = () => {
+    return fetch(URL + "/api/memes/blacklisted", apiFacade.makeOptions("GET"))
+    .then(handleHttpErrors);
+  }
+
   return {
     getMeme,
     getCat,
@@ -98,7 +113,10 @@ const memeFacade = () => {
     getFavoriteList,
     reportMeme,
     addUserMeme,
-    getUserMemes
+    getUserMemes,
+    blacklistMeme,
+    dismissMemeReports,
+    getBlacklistedMemes
   };
 };
 

@@ -16,7 +16,7 @@ const GridWrapper = styled.div`
 
 export let URL = API_URL;
 
-export default function Funny({isLoggedIn}) {
+export default function Funny({isLoggedIn, blacklistedMemes}) {
   const [funnys, setFunnys] = useState([])
 
   useEffect(() => {
@@ -38,6 +38,7 @@ export default function Funny({isLoggedIn}) {
     key={funnys.indexOf(funny)} 
     loadMore={loadMore} 
     hasVotes={false}
+    blacklistedMemes={blacklistedMemes}
     isLoggedIn={isLoggedIn}/>)}
           <Button onClick={loadMore} className="btn btn-secondary">Load more</Button>
   </GridWrapper>

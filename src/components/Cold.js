@@ -11,7 +11,7 @@ const GridWrapper = styled.div`
 `;
 
 
-export default function Cold({isLoggedIn}) {
+export default function Cold({isLoggedIn, blacklistedMemes}) {
     const [coldList, setColdList] = useState([]);
     
     useEffect(() => {
@@ -33,6 +33,7 @@ export default function Cold({isLoggedIn}) {
             meme={coldListItem} 
             key={coldListItem.imageUrl} 
             isLoggedIn={isLoggedIn}
+            blacklistedMemes={blacklistedMemes}
             />)}
         </GridWrapper>
 

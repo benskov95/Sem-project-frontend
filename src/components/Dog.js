@@ -11,7 +11,7 @@ const GridWrapper = styled.div`
 `;
 
 
-export default function Dog({isLoggedIn}) {
+export default function Dog({isLoggedIn, blacklistedMemes}) {
 
     const [dogs, setDogs] = useState([]);
     useEffect(() => {
@@ -35,6 +35,7 @@ export default function Dog({isLoggedIn}) {
            loadMore={loadMore} 
            hasVotes={false}
            isLoggedIn={isLoggedIn}
+           blacklistedMemes={blacklistedMemes}
            />)}
           <Button onClick={loadMore} className="btn btn-secondary">Load more</Button>
         </GridWrapper>

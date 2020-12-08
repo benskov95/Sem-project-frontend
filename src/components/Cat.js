@@ -13,7 +13,7 @@ const GridWrapper = styled.div`
 
 
 
-export default function Cat({isLoggedIn}) {
+export default function Cat({isLoggedIn, blacklistedMemes}) {
 
     const [cats, setCats] = useState([])
 
@@ -37,6 +37,7 @@ export default function Cat({isLoggedIn}) {
           loadMore={loadMore} 
           hasVotes={false}
           isLoggedIn={isLoggedIn}
+          blacklistedMemes={blacklistedMemes}
           />)}
           <Button onClick={loadMore} className="btn btn-secondary">Load more</Button>
         </GridWrapper>

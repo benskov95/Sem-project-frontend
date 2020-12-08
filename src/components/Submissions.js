@@ -10,7 +10,7 @@ const GridWrapper = styled.div`
   margin-right: 6em;
 `; 
 
-export default function Submissions() {
+export default function Submissions({isLoggedIn, blacklistedMemes}) {
     const [userMemes, setUserMemes] = useState([]);
 
     useEffect(() => {
@@ -20,7 +20,14 @@ export default function Submissions() {
 
     return (
         <GridWrapper>
-            {userMemes.map(meme => <Content hasVotes={true} meme={meme} key={meme.imageUrl} isUserSubmission={true} />)}
+            {userMemes.map(meme => 
+            <Content 
+            hasVotes={true} 
+            meme={meme} 
+            key={meme.imageUrl} 
+            isUserSubmission={true} 
+            blacklistedMemes={blacklistedMemes}
+            isLoggedIn/>)}
         </GridWrapper>
     )
 }

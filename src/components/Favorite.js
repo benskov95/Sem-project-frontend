@@ -12,7 +12,7 @@ const GridWrapper = styled.div`
 `;
 
 
-export default function Favorite({ isLoggedIn, user }) {
+export default function Favorite({ isLoggedIn, user, blacklistedMemes }) {
 
     const [favoriteList, setFavoriteList] = useState([]);
     useEffect(() => {
@@ -28,7 +28,12 @@ export default function Favorite({ isLoggedIn, user }) {
         {isLoggedIn ? (
             <div>
             <GridWrapper>
-                {favoriteList.map(favoriteListItem => <Content meme={favoriteListItem} key={favoriteListItem.imageUrl} hasVotes={true} />)}
+                {favoriteList.map(favoriteListItem => 
+                <Content 
+                meme={favoriteListItem}
+                 key={favoriteListItem.imageUrl} 
+                 hasVotes={true} 
+                 blacklistedMemes={blacklistedMemes} />)}
             </GridWrapper>
             </div>
         ) : <GridWrapper>

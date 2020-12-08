@@ -12,7 +12,7 @@ const GridWrapper = styled.div`
 
 
 
-export default function YesOrNo({isLoggedIn}) {
+export default function YesOrNo({isLoggedIn, blacklistedMemes}) {
 
     const [yons, setYons] = useState([])
 
@@ -36,6 +36,7 @@ export default function YesOrNo({isLoggedIn}) {
            loadMore={loadMore} 
            hasVotes={false}
            isLoggedIn={isLoggedIn}
+           blacklistedMemes={blacklistedMemes}
            />)}
           <Button onClick={loadMore} className="btn btn-secondary">Load more</Button>
         </GridWrapper>

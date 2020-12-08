@@ -56,7 +56,7 @@ const Styles = styled.div`
 `;
 
 
-export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
+export default function Header({ isLoggedIn, setLoginStatus, loginMsg, blacklistedMemes }) {
   let user = isLoggedIn ? localStorage.getItem("user") : "";
   let roles = isLoggedIn ? localStorage.getItem("roles") : "";
   const [profilePicture, setProfilePicture] = useState(localStorage.getItem("profilePicture"));
@@ -149,32 +149,34 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
         <PrivateRoute path="/reports" isLoggedIn={isLoggedIn} component={ReportedMemes} />
 
         <Route exact path="/">
-          <Funny isLoggedIn={isLoggedIn} />
+          <Funny isLoggedIn={isLoggedIn} blacklistedMemes={blacklistedMemes} />
         </Route>
         <Route path="/cat">
-          <Cat isLoggedIn={isLoggedIn} />
+          <Cat isLoggedIn={isLoggedIn} blacklistedMemes={blacklistedMemes}/>
         </Route>
         <Route path="/yesorno">
-          <YesOrNo isLoggedIn={isLoggedIn} />
+          <YesOrNo isLoggedIn={isLoggedIn} blacklistedMemes={blacklistedMemes}/>
         </Route>
         <Route path="/dog">
-          <Dog isLoggedIn={isLoggedIn} />
+          <Dog isLoggedIn={isLoggedIn} blacklistedMemes={blacklistedMemes}/>
         </Route>
         <Route path="/hot">
-          <Hot isLoggedIn={isLoggedIn} />
+          <Hot isLoggedIn={isLoggedIn} blacklistedMemes={blacklistedMemes}/>
         </Route>
         <Route path="/cold">
-          <Cold isLoggedIn={isLoggedIn} />
+          <Cold isLoggedIn={isLoggedIn} blacklistedMemes={blacklistedMemes}/>
         </Route>
         <Route path="/favorite">
-          <Favorite isLoggedIn={isLoggedIn} user={user} />
+          <Favorite isLoggedIn={isLoggedIn} user={user} blacklistedMemes={blacklistedMemes}/>
         </Route>
-
+        <Route path="/submissions">
+          <Submissions isLoggedIn={isLoggedIn} blacklistedMemes={blacklistedMemes}/>
+        </Route>
         <Route path={`/comment/:meme_id`} >
           <Comment isLoggedIn={isLoggedIn} />
         </Route>
+
         <Route path="/post" component={PostMeme} />
-        <Route path="/submissions" component={Submissions} />
 
         <Route component={NoMatch} />
 
