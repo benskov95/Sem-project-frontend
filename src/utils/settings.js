@@ -1,1 +1,1 @@
-export const API_URL = "https://bencat.dk/3sem";
+export const API_URL = "https://localhost:8080/startcode-ca3";
