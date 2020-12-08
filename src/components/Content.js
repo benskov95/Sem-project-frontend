@@ -139,7 +139,7 @@ export default function Content({ meme, hasVotes, isLoggedIn,isUserSubmission })
             onClick={handleShowReport}
             size="2x"
             icon={faFlag}
-            style={{ color: "black", float: "right", marginTop: "10px", marginRight: "10px" }}
+            style={{cursor: "pointer", color: "black", float: "right", marginTop: "10px", marginRight: "10px" }}
           />
           <Report handleShowReport={handleShowReport} showReport={showReport} meme_id={meme.meme_id}/>
         </div>
