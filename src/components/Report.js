@@ -39,13 +39,15 @@ export default function Report ({showReport, handleShowReport, meme_id}){
         <Modal.Body>
             <form onChange={handleChange} onSubmit={submitReport}>
                 
-              <input className="radio-inline" type="radio" value="Pornography" name="description"/> Pornography
-                  <br/>
+                 <input className="radio-inline" type="radio" value="Pornography" name="description"/> Pornography
+                 <br/>
                  <input className="radio-inline"  type="radio" value="Self-Harm" name="description" /> Self-Harm
                  <br/>
-                 <input className="radio-inline"  type="radio" value="Violent" name="description" /> Violent
+                 <input className="radio-inline"  type="radio" value="Violence" name="description" /> Violence
                  <br/>
                  <input className="radio-inline"  type="radio" value="Illegal activities" name="description" /> Illegal activities
+                 <br/>
+                 <input className="radio-inline"  type="radio" value="Offensive language" name="description" /> Offensive language
                  <br/>
                  <br/>
                 

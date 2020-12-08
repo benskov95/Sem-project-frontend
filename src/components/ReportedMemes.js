@@ -24,6 +24,14 @@ export default function ReportedMemes() {
         return self.indexOf(value) === index;
     }
 
+    const blacklistMeme = () => {
+        
+    }
+
+    const dismissReports = () => {
+        
+    }
+
     return (
         <div>
             <h1>Hello Admin</h1>
@@ -38,6 +46,8 @@ export default function ReportedMemes() {
                             <th>Meme</th>
                             <th>Flagged as</th>
                             <th>Number of reports</th>
+                            <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -59,6 +69,20 @@ export default function ReportedMemes() {
                                         </td>
                                         <td>{filter}</td>
                                         <td>{meme.reports.length}</td>
+                                        <td>
+                                            <button
+                                             onClick={blacklistMeme} 
+                                             className="btn btn-dark"
+                                             > Blacklist
+                                             </button>
+                                        </td>
+                                        <td>
+                                            <button
+                                            onClick={dismissReports}
+                                            className="btn btn-secondary"
+                                            > Dismiss
+                                            </button>
+                                        </td>
                                     </tr>
                                 </React.Fragment>
                             );

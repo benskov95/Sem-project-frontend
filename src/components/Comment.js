@@ -59,7 +59,7 @@ export default function Comments({isLoggedIn}) {
           </div>    
           
           {comments.map(comment => 
-           <div className="commentContent"> 
+           <div className="commentContent" key={comment.username + comment.dateOfPost}> 
               <div className="commentHeader">
               <h3 >{comment.username}</h3></div>
               <div className="commentTime">{comment.dateOfPost}</div> 

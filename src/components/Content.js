@@ -8,7 +8,7 @@ import Report from "./Report"
 
 
 
-export default function Content({ meme, hasVotes, isLoggedIn,isUserSubmission }) {
+export default function Content({ meme, hasVotes, isLoggedIn, isUserSubmission }) {
   const [msg, setMsg] = useState("");
   const [voteType, setVoteType] = useState("none");
   const [votes, setVotes] = useState(meme);
@@ -141,7 +141,7 @@ export default function Content({ meme, hasVotes, isLoggedIn,isUserSubmission })
             icon={faFlag}
             style={{cursor: "pointer", color: "black", float: "right", marginTop: "10px", marginRight: "10px" }}
           />
-          <Report handleShowReport={handleShowReport} showReport={showReport} meme_id={meme.meme_id}/>
+          <Report handleShowReport={handleShowReport} showReport={showReport} meme_id={meme.meme_id} />
         </div>
       )}
       <br />
