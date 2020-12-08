@@ -169,7 +169,6 @@ const isBlacklisted = (meme, blacklistedMemes) => {
   blacklistedMemes.forEach(blacklistedMeme => {
     if (meme.imageUrl == blacklistedMeme.imageUrl) {
       meme.imageUrl = "blacklisted";
-      console.log("hej")
     }
   })
 }

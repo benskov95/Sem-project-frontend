@@ -61,7 +61,12 @@ export default function Comments({isLoggedIn}) {
           {comments.map(comment => 
            <div className="commentContent" key={comment.username + comment.dateOfPost}> 
               <div className="commentHeader">
-              <h3 >{comment.username}</h3></div>
+                {comment.username === username ? (
+                  <h3>{comment.username} (me)</h3>
+                ) : 
+                  <h3>{comment.username}</h3>
+                }
+              </div>
               <div className="commentTime">{comment.dateOfPost}</div> 
               <div className="profilpicture">
               <img className="profileImg" src={comment.profilePicture} alt=""/>
