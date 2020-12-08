@@ -26,6 +26,7 @@ import Favorite from "../components/Favorite";
 import Comment from "../components/Comment"
 import PostMeme from '../components/PostMeme';
 import Submissions from "../components/Submissions"
+import ReportedMemes from "../components/ReportedMemes"
 
 const Styles = styled.div`
  
@@ -89,9 +90,9 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
           <Navbar expand="lg">
             <Navbar.Brand as={NavLink} to="/"><img src={BornGag} className="img-fluid" alt="logo" /></Navbar.Brand>
             {isLoggedIn ? (
-            <NavLink to="/post" style={{position: "fixed", left: 160}}>
+              <NavLink to="/post" style={{ position: "fixed", left: 160 }}>
                 Post meme
-            </NavLink>
+              </NavLink>
             ) : ""}
             <Nav className="auto">
               {!isLoggedIn ? (
@@ -145,6 +146,7 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
           <Redirect to="/" />
         </Route>
         <PrivateRoute path="/admin" isLoggedIn={isLoggedIn} component={Admin} />
+        <PrivateRoute path="/reports" isLoggedIn={isLoggedIn} component={ReportedMemes} />
 
         <Route exact path="/">
           <Funny isLoggedIn={isLoggedIn} />
@@ -171,11 +173,11 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
         <Route path="/hot" component={Hot} />
         <Route path="/cold" component={Cold} />
         <Route path={`/comment/:meme_id`} >
-        <Comment isLoggedIn={isLoggedIn}/>
-        </Route> 
+          <Comment isLoggedIn={isLoggedIn} />
+        </Route>
         <Route path="/post" component={PostMeme} />
         <Route path="/submissions" component={Submissions} />
-       
+
         <Route component={NoMatch} />
 
 

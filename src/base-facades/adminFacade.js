@@ -29,7 +29,12 @@ const adminFacade = () => {
     ).then(handleHttpErrors);
   };
 
-  return { getUsers, deleteUser, banUser, unbanUser };
+  const getReportedMemes = () => {
+    return fetch(URL + "/api/memes/reports", apiFacade.makeOptions("GET", true))
+      .then(handleHttpErrors);
+  };
+
+  return { getUsers, deleteUser, banUser, unbanUser, getReportedMemes };
 };
 
 const facade = adminFacade();

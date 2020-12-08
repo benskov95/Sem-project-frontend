@@ -76,6 +76,10 @@ export default function EditUser({ username, profilePicture, setProfilePicture, 
                     {roles.includes("admin") ? (
                         <Link to="/admin"><button className="btn btn-secondary" style={{ marginTop: 5 }}>Manage users</button></Link>
                     ) : ""}
+                    <br />
+                    {roles.includes("admin") ? (
+                        <Link to="/reports"><button className="btn btn-secondary" style={{ marginTop: 5 }}>Manage reports</button></Link>
+                    ) : ""}
                 </div>
             }
 
