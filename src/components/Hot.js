@@ -15,7 +15,13 @@ export default function Hot() {
     const [hotList, setHotList] = useState([]);
 
     useEffect(() => {
-        memeFacade.getHotList().then(res => setHotList(res))
+        memeFacade.getHotList().then(res => {
+            let sorted = [...res];
+            sorted.sort(function(a, b) {
+                return b.upvotes - a.upvotes;
+            }) 
+            setHotList([...sorted]);
+        })
     }, [])
 
     return (

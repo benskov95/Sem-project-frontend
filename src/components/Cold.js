@@ -15,8 +15,13 @@ export default function Cold() {
     const [coldList, setColdList] = useState([]);
     
     useEffect(() => {
-        memeFacade.getColdList().then(res => setColdList(res))
-
+        memeFacade.getColdList().then(res => {
+            let sorted = [...res];
+            sorted.sort(function(a, b) {
+                return b.downvotes - a.downvotes;
+            }) 
+            setColdList([...sorted]);
+        })
     }, [])
 
 
