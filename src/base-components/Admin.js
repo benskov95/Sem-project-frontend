@@ -6,19 +6,40 @@ import "bootstrap/dist/css/bootstrap.css";
 export default function Admin() {
   const [allUsers, setAllUsers] = useState([]);
   const [msg, setMsg] = useState("");
-
+  const [filtered, setFiltered] =useState([])
+ 
   useEffect(() => {
-    adminFacade.getUsers().then((users) => setAllUsers([...users]));
+    adminFacade.getUsers().then((users) =>{ 
+        setAllUsers([...users])
+        setFiltered([...users])});
   }, [msg]);
 
-  allUsers.forEach((user) => {
+  filtered.forEach((user) => {
     if (user.username === localStorage.getItem("user")) {
       let excludedUser = [...allUsers];
       let index = excludedUser.indexOf(user);
       excludedUser.splice(index, 1);
-      setAllUsers([...excludedUser]);
+      setFiltered([...excludedUser]);
     }
   });
+
+  const handleSearch = (e) =>{
+    let searchInput = e.target.value.toLowerCase()
+
+    if (searchInput.length >= 1){
+     let user = filtered.filter(function (x) {
+       return x.username.includes(searchInput)
+     })
+     if(user.length === 0){
+        setFiltered([...allUsers])
+     } else{
+      setFiltered([...user]) 
+     } 
+    }
+    if (searchInput.length <= 1){
+      setFiltered([...allUsers])
+    }
+  }
 
   const deleteUser = (e) => {
     adminFacade
@@ -50,11 +71,11 @@ export default function Admin() {
             <tr>
               <th>User</th>
               <th>Role(s)</th>
-              <th></th>
+              <th><input style={{float:"right"}} placeholder="Search for User..." onChange={handleSearch}></input></th>
             </tr>
           </thead>
           <tbody>
-            {allUsers.map((user) => {
+            {filtered.map((user) => {
               let roles = user.roles.join(", ");
               return (
                 <tr key={user.username}>
