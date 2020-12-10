@@ -24,11 +24,11 @@ export default function PostMeme() {
         e.preventDefault();
         setMsg("");
         setError("");
-        if(memeImg.includes("https") && memeImg.length > 10) {
-            if (memeImg.includes("jpg" || memeImg.includes("jpeg") || memeImg.includes("png"))) {
-                memeFacade.addUserMeme({imageUrl: memeImg, postedBy: user})
-                .then(res => setMsg("Meme has been posted"))
-                .catch(err => printError(err, setError));
+        if (memeImg.includes("https") && memeImg.length > 10) {
+            if (memeImg.includes("jpg") || memeImg.includes("jpeg") || memeImg.includes("png") || memeImg.includes("gif")) {
+                memeFacade.addUserMeme({ imageUrl: memeImg, postedBy: user })
+                    .then(res => setMsg("Meme has been posted"))
+                    .catch(err => printError(err, setError));
             } else {
                 setError("The provided URL does not link to a picture. Make sure you have the correct URL.")
             }
@@ -38,34 +38,34 @@ export default function PostMeme() {
     }
 
     return (
-        <div style={{marginTop: "100px"}}>
+        <div style={{ marginTop: "100px" }}>
             <h1>Post a meme</h1>
             <p><i>Posting offensive content will result in a ban.</i></p>
-            <p style={{fontSize: "16px", color: "green"}}>{msg}</p>
-            <p style={{fontSize: "16px", color: "red"}}>{error}</p>
+            <p style={{ fontSize: "16px", color: "green" }}>{msg}</p>
+            <p style={{ fontSize: "16px", color: "red" }}>{error}</p>
             <br />
             <form onSubmit={handleSubmit}>
                 {memeImg.includes("https") ? (
                     <img src={memeImg} className="meme-img" alt="" />
                 ) : ""}
                 <br /><br />
-                <input 
-                placeholder="Enter image URL" 
-                value={memeImg} 
-                onChange={handleChange}
-                style={{marginBottom: "10px"}}
+                <input
+                    placeholder="Enter image URL"
+                    value={memeImg}
+                    onChange={handleChange}
+                    style={{ marginBottom: "10px" }}
                 />
                 <br />
 
-                <input 
-                className="btn btn-secondary" 
-                type="submit" 
-                value="Post meme" />
-                
-                <button 
-                className="btn btn-secondary" 
-                style={{marginLeft: "5px"}} 
-                onClick={clear}>Clear
+                <input
+                    className="btn btn-secondary"
+                    type="submit"
+                    value="Post meme" />
+
+                <button
+                    className="btn btn-secondary"
+                    style={{ marginLeft: "5px" }}
+                    onClick={clear}>Clear
                 </button>
             </form>
         </div>
@@ -74,6 +74,6 @@ export default function PostMeme() {
 
 const printError = (promise, setError) => {
     promise.fullError.then(function (status) {
-      setError(`${status.message}`);
+        setError(`${status.message}`);
     });
-  };
+};
