@@ -27,12 +27,12 @@ export default function ReportedMemes() {
 
     const blacklistMeme = (e) => {
         memeFacade.blacklistMeme(e.target.id)
-        .then(res => setMsg("Meme has been successfully blacklisted."))
+            .then(res => setMsg(`Meme ${e.target.id} has been successfully blacklisted.`))
     }
 
     const dismissReports = (e) => {
         memeFacade.dismissMemeReports(e.target.id)
-        .then(res => setMsg("All reports for this meme have been deleted."))
+            .then(res => setMsg(`All reports for this meme, ${e.target.id}, have been deleted.`))
     }
 
     return (
@@ -62,12 +62,12 @@ export default function ReportedMemes() {
                                 <React.Fragment key={meme.meme_id}>
                                     <tr key={meme.meme_id}>
                                         <td>
-                                            <img 
-                                            id={meme.imageUrl} 
-                                            src={meme.imageUrl} 
-                                            style={{ maxWidth: 55 }} 
-                                            onClick={handleShow}
-                                            alt=""
+                                            <img
+                                                id={meme.imageUrl}
+                                                src={meme.imageUrl}
+                                                style={{ maxWidth: 55 }}
+                                                onClick={handleShow}
+                                                alt=""
                                             >
                                             </img>
                                         </td>
@@ -76,17 +76,17 @@ export default function ReportedMemes() {
                                         <td>{meme.postedBy}</td>
                                         <td>
                                             <button
-                                            id={meme.meme_id}
-                                             onClick={blacklistMeme} 
-                                             className="btn btn-dark"
-                                             > Blacklist
+                                                id={meme.meme_id}
+                                                onClick={blacklistMeme}
+                                                className="btn btn-dark"
+                                            > Blacklist
                                              </button>
                                         </td>
                                         <td>
                                             <button
-                                            id={meme.meme_id}
-                                            onClick={dismissReports}
-                                            className="btn btn-secondary"
+                                                id={meme.meme_id}
+                                                onClick={dismissReports}
+                                                className="btn btn-secondary"
                                             > Dismiss
                                             </button>
                                         </td>
@@ -108,7 +108,7 @@ const ImageModal = ({ imageUrl, show, handleShow }) => {
             <Modal.Header closeButton>
             </Modal.Header>
             <Modal.Body>
-                <img alt="" src={imageUrl} className="img-fluid" style={{minWidth: "450px"}} />
+                <img alt="" src={imageUrl} className="img-fluid" style={{ minWidth: "450px" }} />
             </Modal.Body>
         </Modal>
     );
