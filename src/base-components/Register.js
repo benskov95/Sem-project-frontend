@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import apiFacade from "../base-facades/apiFacade";
 import { URL } from "../components/Funny";
 import { Modal } from "react-bootstrap";
-import Confetti from 'react-confetti';
+import Confetti from "react-confetti";
 
 export default function Register({ handleShowRegister, showRegister }) {
   const initialState = { username: "", password: "" };
@@ -21,10 +21,11 @@ export default function Register({ handleShowRegister, showRegister }) {
     if (URL === "") {
       setError("Remember to select an API on the Home page.");
     } else {
-      if (user.username !== "" || user.password !== "") {
+      if (user.username !== "" && user.password !== "") {
         apiFacade
           .register(user)
-          .then((res) => setMsg(`${res.username} has been registered.`)).then(setSuccess(true))
+          .then((res) => setMsg(`${res.username} has been registered.`))
+          .then(setSuccess(true))
           .catch((promise) => {
             promise.fullError.then((error) => {
               setError(error.message);
@@ -40,7 +41,13 @@ export default function Register({ handleShowRegister, showRegister }) {
   return (
     <Modal show={showRegister} onHide={handleShowRegister}>
       {success && msg && (
-        <Confetti width={498} height={290.5} opacity={0.7} numberOfPieces={125} />)}
+        <Confetti
+          width={498}
+          height={290.5}
+          opacity={0.7}
+          numberOfPieces={125}
+        />
+      )}
       <Modal.Header closeButton>
         <Modal.Title style={{ marginLeft: "42.3%" }}>Sign Up</Modal.Title>
       </Modal.Header>
